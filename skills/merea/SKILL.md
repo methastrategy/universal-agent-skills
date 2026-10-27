@@ -14,7 +14,7 @@ Deconstruct any observed outcome, system state, human behavior, business outcome
 ## Tri-Modal Architecture (Auto-Detection)
 
 1. **Universal Conceptual & Systems Mode (Default)**: Triggered by abstract questions, confusing ideas, business dilemmas, life situations, philosophical concepts, or societal trends. Deconstructs hidden incentives and First Principles. Reads [conceptual-reverse-engineering.md](references/conceptual-reverse-engineering.md).
-2. **Software, Web & Binary Artifact Mode (Powered by REA)**: Triggered when inspecting software artifacts (`.exe`, `.dll`, `.so`, `.dylib`, `.apk`, `.asar`, `.wasm`, `.pyc`, web bundles, network logs, or raw code). Activates REA MCP tools and local binary deconstruction. Reads [rea-technical-guide.md](references/rea-technical-guide.md).
+2. **Software, Web & Binary Artifact Mode (Powered by REA)**: Triggered when inspecting software artifacts (`.exe`, `.dll`, `.so`, `.dylib`, `.apk`, `.asar`, `.wasm`, `.pyc`, web bundles, network logs, or raw code). Activates REA MCP tools and local binary deconstruction. Reads [rea-technical-guide.md](references/rea-technical-guide.md). ก่อนเริ่มทุกครั้ง: (a) เช็ก `rea --version` ตรงกับ `npm view rea-agents version` — mismatch = install เก่า ต้องอัปเกรดก่อน ไม่งั้น capability ที่จะใช้ยังไม่มีจริงบนเครื่อง; (b) รัน `rea providers` เพื่อดูว่ามี native engine ไหม ถ้าไม่มี ให้จำกัดขอบเขตไปที่ managed `.NET/CLI` หรือ artifact graph แทนการสัญญาว่าจะ decompile native. (c) **จำแนก packaging class จากไฟล์จริงก่อนเสมอ** (CLR / PyInstaller / Electron asar / installer SFX / Java / native arch) — REA มองไม่เห็น Python/PyInstaller หรือ installer เลย การเดาจากชื่อโฟลเดอร์หรือ marker ข้างเคียงทำให้สรุปผิด class และเสียเวลาหนึ่งรอบเต็ม; ตารางสัญญาณอยู่ใน section 1.1. Workflow หลักคือ managed pipeline: `inspect-managed-artifact` → `inspect-managed-members --format json` → ห่อเป็น `{"managed_members": <evidence>}` → `project-managed-application-graph` แล้ว BFS ตาม edge `calls` เพื่อเอา feature pipeline. Windows invocation, graph contract, .asar/archive, native scope และ fleet-audit recipe อยู่ใน section 1.1–5 ของ reference นั้น
 3. **Quantitative EA & Strategy Reconstruction Mode**: Triggered by trading statements, MT5 Strategy Tester reports, deal logs, or trade histories. Deconstructs 5-vector execution invariants and synthesizes complete, runnable MQL5 (`.mq5`) code. Reads [ea-strategy-reverse-engineering.md](references/ea-strategy-reverse-engineering.md).
 
 ---
@@ -57,6 +57,8 @@ Deconstruct any observed outcome, system state, human behavior, business outcome
 ---
 
 ## Output Protocol
+
+เวลา user ถามว่า "ในเครื่องมีอะไร แกะอะไรได้บ้าง" ให้ตอบเป็น**กลุ่ม capability** (ทำได้เต็ม / บางส่วน / ทำไม่ได้ + เหตุผลกลไก + ตัวแทน 1 ตัวอย่าง) และปิดด้วยเส้นทางถัดไปที่เดียว — ไม่ใช่ทะเบียนโปรแกรมทั้งหมด และไม่ใช่ตาราง native/Electron ดิบ ๆ
 
 When `/merea` is invoked, format reports according to the 6-part structure detailed in [report-template.md](references/report-template.md):
 1. **Executive Core & Working Mechanism**

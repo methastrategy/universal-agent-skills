@@ -22,6 +22,7 @@ description: "[วางแผนสถาปัตยกรรม] วางผ
 - **ลำดับชั้นสลับโหมดโมเดลสำรอง:** อ่าน `references/model-fallback-cascade.md` ( LiteLLM / vLLM / Ollama 3-Tier Fallback Cascade )
 - **สถาปัตยกรรม Edge SQL และความปลอดภัย RLS:** อ่าน `references/edge-sql-and-rls-architecture.md` ( Drizzle / Kysely Type-Safe SQL, PostgreSQL Row Level Security )
 - **เครือข่าย Zero-Trust และแทนแนลเสมือน:** อ่าน `references/zero-trust-tunnels-and-mesh.md` ( Tailscale WireGuard Mesh, Cloudflare Tunnels, ChaCha20 Crypto )
+- **การเลือกโฮสติ้งและข้อจำกัดเชิงพาณิชย์:** อ่าน `references/frontend-hosting-matrix.md` ( Frontend Hosting, Cloudflare-First & Vercel Commercial TOS Invariants )
 
 ---
 
