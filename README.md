@@ -1,6 +1,7 @@
 # ⚡ Universal Agent Skills & Autonomous Engineering Brain
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/methastrategy/universal-agent-skills/actions/workflows/verify.yml/badge.svg)](https://github.com/methastrategy/universal-agent-skills/actions/workflows/verify.yml)
 [![Antigravity](https://img.shields.io/badge/Antigravity-2.0_Ready-4285F4?logo=google&logoColor=white)](https://antigravity.google.com)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Compatible-D97757?logo=anthropic&logoColor=white)](https://anthropic.com)
 [![Cursor](https://img.shields.io/badge/Cursor-Ready-000000?logo=cursor&logoColor=white)](https://cursor.com)
