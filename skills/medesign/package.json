@@ -1,0 +1,84 @@
+{
+  "name": "medesign",
+  "version": "1.6.1",
+  "description": "Autonomous Design Engineering Toolkit & Automated Linter for AI Coding Assistants",
+  "main": "bin/medesign.js",
+  "bin": {
+    "medesign": "bin/medesign.js",
+    "mepolish": "bin/mepolish.js",
+    "mebolder": "bin/mebolder.js",
+    "mequiet": "bin/mequiet.js",
+    "melint": "bin/melint.js",
+    "mesearch": "bin/mesearch.js",
+    "mesnapshot": "bin/mesnapshot.js"
+  },
+  "files": [
+    "bin",
+    "presets",
+    "references",
+    "integrations",
+    "SKILL.md",
+    "docs",
+    "data",
+    "scripts/export-tokens.js",
+    "tests/linter.js",
+    "tests/browser-audit.js",
+    "tests/snapshot.js",
+    "tests/schemas",
+    "tests/visual-testbed.html",
+    "examples",
+    "medesign.config.js"
+  ],
+  "scripts": {
+    "test": "node tests/runner.js && node tests/validate-sarif.js && node tests/test-tokens.js && node tests/test-cli.js && node tests/test-gamut.js && node tests/test-behavioral-matrix.js",
+    "test:unit": "node tests/runner.js",
+    "test:sarif": "node tests/validate-sarif.js",
+    "test:tokens": "node tests/test-tokens.js",
+    "test:cli": "node tests/test-cli.js",
+    "test:benchmark": "node tests/test-blind-benchmark.js",
+    "test:browser": "node tests/runner.js --browser",
+    "test:snapshot": "node tests/snapshot.js examples/cadastral-qaqc-slide.html",
+    "search": "node bin/medesign.js search",
+    "polish": "node bin/medesign.js polish",
+    "bolder": "node bin/medesign.js bolder",
+    "quiet": "node bin/medesign.js quiet",
+    "lint": "node bin/medesign.js lint",
+    "audit": "node bin/medesign.js audit",
+    "snapshot": "node bin/medesign.js snapshot",
+    "tokens": "node bin/medesign.js tokens",
+    "doctor": "node bin/medesign.js doctor",
+    "prepublishOnly": "npm test",
+    "test:behavioral": "node tests/test-behavioral-matrix.js",
+    "test:gamut": "node tests/test-gamut.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/methastrategy/medesign.git"
+  },
+  "homepage": "https://github.com/methastrategy/medesign#readme",
+  "bugs": {
+    "url": "https://github.com/methastrategy/medesign/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "design-tokens",
+    "linter",
+    "accessibility",
+    "design-systems",
+    "oklch",
+    "tailwind",
+    "dtcg",
+    "sarif",
+    "ai-coding-assistant",
+    "antigravity",
+    "claude-code"
+  ],
+  "author": "Metha Tripraphankit (  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
