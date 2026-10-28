@@ -60,7 +60,35 @@ flowchart TD
 
 ---
 
-## ⚡ Quick Start: How to Use
+## ⚡ 1-Click Quick Installation
+
+Install all 22 skills and cognitive rules into your agent environment in seconds:
+
+### Windows (PowerShell)
+```powershell
+# Default: Installs into Google Antigravity (~/.gemini/config/skills)
+.\install.ps1
+
+# Install for Cursor IDE (creates .cursor/skills & .cursorrules)
+.\install.ps1 -Target cursor
+
+# Install for Claude Code (creates .claude/skills & CLAUDE.md)
+.\install.ps1 -Target claude
+```
+
+### macOS / Linux (Bash)
+```bash
+# Default: Installs into Google Antigravity (~/.gemini/config/skills)
+chmod +x install.sh && ./install.sh
+
+# Install for Cursor IDE
+./install.sh cursor
+
+# Install for Claude Code
+./install.sh claude
+```
+
+### Manual Directory Placement
 
 ### 1. In Google Antigravity 2.0
 Clone or copy the `skills/` directory into:

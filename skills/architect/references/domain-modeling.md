@@ -72,3 +72,21 @@ Only offer to create an ADR when all three are true:
 3. **The result of a real trade-off**: there were genuine alternatives and you picked one for specific reasons
 
 If any of the three is missing, skip the ADR. Use the format in [ADR-FORMAT.md](./ADR-FORMAT.md).
+
+---
+
+## Domain-Logic Alignment & Build-vs-Buy Threshold (The One-Person SaaS Invariant)
+
+เมื่อออกแบบระบบภายในสำหรับธุรกิจ (Internal Operations, POS, CRM, Logistics, Workflow Automation):
+
+### 1. The Domain-Logic Mismatch Principle
+- **สาเหตุของความล้มเหลวส่วนใหญ่:** ความไม่ตรงกันระหว่าง "ตรรกะหน้างานจริงของธุรกิจ (Shop-Floor Reality)" กับ "ข้อจำกัดของซอฟต์แวร์สำเร็จรูป" หรือ "การตีความผิดของโปรแกรมเมอร์ภายนอก"
+- **The Invariant:** สถาปัตยกรรมของซอฟต์แวร์ภายในต้องจำลอง (Mirror) ลำดับขั้นตอนจริงของธุรกิจ 1:1 เสมอ ห้ามดัดแปลงหรือบิดเบือนกระบวนการทำงานของคนหน้างานเพื่อให้เข้ากับกรอบจำกัดของซอฟต์แวร์สำเร็จรูป
+
+### 2. Build vs. Buy Decision Rubric
+| มิติ | เลือกสร้างเองด้วย AI (Build In-House Micro-Tool) | เลือกซื้อ/เช่าบริการสำเร็จรูป (Buy Commodity SaaS) |
+| :--- | :--- | :--- |
+| **ความได้เปรียบทางธุรกิจ** | เป็นหัวใจของกระบวนการทำกำไร (Core Moat / Domain Secret) | เป็นงานสาธารณูปโภคทั่วไป (Non-Differentiating Commodity) |
+| **ตัวอย่างงาน** | • ระบบตัดสต็อกเฉพาะทาง (เช่น อาหารแช่แข็ง, จิวเวลรี่)<br>• ระบบ POS/Order Flow ที่ออกแบบตามพฤติกรรมลูกค้าจริง<br>• ตัวคำนวณราคา/สูตรเฉพาะของโรงงาน | • Payment Gateway (Stripe, Omise)<br>• Transactional Email / SMS (Resend, Twilio)<br>• Cloud Infrastructure (Cloudflare Pages, Cloud Run) |
+| **การประเมิน TCO** | ไร้ค่า Subscription รายเดือนต่อเนื่อง, ไร้ Key-Person Risk (ดูแลผ่าน AI Prompt & Git) | คุ้มกว่าการมาเขียน Compliance/Security/Banking เอง |
+
