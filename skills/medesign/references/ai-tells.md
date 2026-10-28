@@ -132,3 +132,41 @@ Scope: text rendered in the UI being built; does not apply to chat replies or sk
    - **NO Hit-Target Visual Contamination (The Invisible Touch Halo Rule):** เมื่อทำขนาดปุ่ม/แถบควบคุม $\ge 44$px ตามเกณฑ์การเข้าถึง ห้ามใส่สีพื้นหลังทึบลงบนกล่อง 44px ให้คงสภาพกล่อง 44px เป็นสีโปร่งใส (Transparent Hit Box) แล้วปล่อยให้แถบ Visual Track ขนาด 4px หรือไอคอนอยู่ตรงกลางอย่างอิสระ
    - **NO Stretched Dash Frequency Spectrum:** ห้ามทำ Audio Spectrum ด้วย Flex Div ขยายเต็มความกว้างหน้าจอจนกลายเป็นขีดนอนแบน ต้องใช้แท่งความถี่แนวตั้ง 32-48 แท่ง (กว้าง 3-4px) ตามเส้นโค้งความถี่เสียงจริง
 
+---
+
+### 9.I Page vs. App Screen Separation Invariant (Anti-Slop Standard)
+*(สกัดจาก `Leonxlnx/taste-skill` - ศิลปะการจัดองค์ประกอบระดับ Awwwards & Production Grade)*
+
+การสร้าง UI ต้องแยกความต่างของ "Page" (หน้าสำหรับอ่าน/เลื่อนดู) และ "App Screen" (หน้าจอสำหรับลงมือทำงาน) ออกจากกันอย่างเด็ดขาด:
+
+1. **Pages (Read & Scrolled - Landing, Marketing, Portfolio, Editorial, Content):**
+   - **Typography & Scale:** ใช้ Expressive Typography ขนาดใหญ่ มีจังหวะวรรคตอนทางสายตา (Narrative Rhythm)
+   - **Color & Mass:** อนุญาตให้ใช้ระนาบสีทึบขนาดใหญ่ (Whole fields of solid color) หรือ Editorial Layouts เพื่อสร้างอารมณ์และแรงดึงดูด
+   - **Imagery:** ใช้ภาพสินค้าจริง หรือ Live Interactive Interface Fragments (ห้ามใช้ภาพ Abstract 3D หรือภาพวาดการ์ตูน AI ไร้ความหมาย)
+
+2. **App Screens (Worked in - Dashboards, Settings, Workspaces, Tables, Forms, Admin):**
+   - **Strict Bans (สิ่งต้องห้ามเด็ดขาดในหน้า App Screen):**
+     - **NO Gradients & Ambient Glows:** ห้ามไล่เฉดสีหรือใส่แสงฟุ้งรอบการ์ดเด็ดขาด
+     - **NO Pastel Icon Badges:** ห้ามใส่ไอคอนในกล่องสี่เหลี่ยมหรือวงกลมสีพาสเทลจางๆ (`bg-blue-50 text-blue-500 rounded-lg p-2`) ซึ่งเป็น AI Template Slop ยอดนิยม
+     - **NO Rainbow Multi-Color Charts:** ห้ามใช้กราฟหลากสีเพื่อความสวยงามโดยไม่มีความหมายเชิงข้อมูล
+     - **NO Invented Vanity Metrics:** ห้ามสร้างการ์ดตัวเลขเปอร์เซ็นต์ลอยๆ ที่ไม่มีแหล่งข้อมูลจริงรองรับ
+   - **Strict Enforcements (สิ่งที่ต้องทำ):**
+     - **Quiet Hairlines:** ใช้เส้นแบ่งขอบบางคมชัด `1px solid var(--border)` เพื่อแบ่งสัดส่วน
+     - **High Data Density:** ออกแบบให้ข้อมูลกระชับ อ่านง่าย และรองรับการทำงานต่อเนื่อง
+     - **Tabular Numerics:** บังคับใช้ `font-variant-numeric: tabular-nums` กับทุกตัวเลขราคา พิกัด เวลา และสถิติ
+     - **Single Accent Color:** ใช้สีเน้น (Accent) เพียงสีเดียวและเฉพาะกับ Interactive States (ปุ่มหลัก, Selection, Focus) เท่านั้น
+
+---
+
+### 9.J Deletion List & Hero Monopoly Invariant
+*(สกัดจาก `oil-oil/oil-ui` - UI Design Discipline for Frontier AI Agents)*
+
+1. **Explicit Deletion List (วางแผนตัดทอนก่อนลงมือโค้ด):**
+   - ก่อนเริ่มเขียนโค้ดหน้าจอใดๆ Agent ต้องระบุ **"Deletion List"** เสมอ: องค์ประกอบใดที่ไม่จำเป็นต่อเป้าหมายหลักของผู้ใช้ให้ตัดทิ้งทันที
+   - อย่าใส่ฟีเจอร์ กราฟ หรือการ์ดตกแต่งเพียงเพราะ "หน้าจอยังมีที่ว่าง" พื้นที่ว่าง (Canvas Surface) คือเครื่องมือจัดลำดับสายตาชั้นยอด
+
+2. **Hero Monopoly & Single Primary Action:**
+   - **1 Visual Hero ต่อ Viewport:** ใน 1 หน้าจอ ต้องมีจุดดึงดูดสายตาหลักเพียงจุดเดียว (ห้ามมีการ์ด 3-4 ใบที่แย่งกันเด่นด้วยสีหรือขนาดเท่ากัน)
+   - **1 Primary CTA ต่อ View:** ในหน้าจอทำงาน ต้องมีปุ่ม Primary Action เด่นชัดเพียงปุ่มเดียว ปุ่มอื่นๆ ต้องถูกลดทอนเป็น Secondary (Ghost/Outline) หรือ Tertiary (Text)
+   - **Grayscale Wireframe First:** โครงสร้างและลำดับความสำคัญของ Layout ต้องผ่านการทดสอบในโหมดขาวดำ (Grayscale) ได้อย่างสมบูรณ์แบบก่อน หากโครงสร้างไม่ชัดเจน ห้ามใช้สีสันหรือฟอนต์แฟนซีมากลบเกลื่อนความล้มเหลวของการจัดวาง
+

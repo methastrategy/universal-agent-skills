@@ -90,6 +90,8 @@ $$\text{default} \to \text{hover} \to \text{pressed} \to \text{focus-visible} \t
 - **Layout Follows Information Relationships:** บังคับให้ AI ระบุ Primary Task, Primary Data, Supporting Context, และ Secondary Actions ก่อนสร้าง Layout
 - **ห้าม Generic Card Uniformity:** ห้ามเปลี่ยนตารางข้อมูลหรือฟังก์ชันที่มีความสำคัญต่างกันให้กลายเป็นการ์ดเรียง 3 ใบที่มีขนาดและ Effect เท่ากันหมด
 - **Surface Effect Budget:** ทุก Drop-shadow, Blur, และ Glow ต้องมีหน้าที่ชัดเจน (แยกชั้นความลึก หรือบอกสถานะ) ไม่ใส่ฟุ้งกระจายจนขาดลำดับขั้น
+- **Strict Page vs. App Screen Separation (`taste-skill`):** ถ้าเป็นหน้า App Screen (Dashboard/Admin/Tables/Settings) ห้ามใส่ Gradient พื้นหลัง, ห้ามใส่ Ambient Glow, ห้ามใส่ไอคอนในกล่องสีพาสเทลจางๆ (`bg-*-50`), ห้ามสร้างกราฟสายรุ้ง และห้ามกุตัวเลข Vanity Metrics; บังคับใช้ Quiet Hairline `1px solid var(--border)` + Tabular Figures (`tabular-nums`) + Single Accent Color
+- **Hero Monopoly & Deletion List Gate (`oil-ui`):** ก่อนลงมือโค้ดต้องกำหนด Deletion List เพื่อตัดส่วนเกิน; ล็อก 1 Visual Hero ต่อ Viewport และ 1 Primary CTA ต่อหน้าจอ; โครงสร้างต้องผ่าน Grayscale Wireframe Test โดยไม่พึ่งพาสีหรือฟอนต์แฟนซี
 
 #### 5. Interactive Self-Audit Score:
 ในหน้า Prototype สามารถแสดงแถบ **`🛡️ 4-Tier Audit Score`** เพื่อแสดงผลตรวจ Contrast, Focus Visibility, และ State Contract สดบนหน้าเว็บได้ทันที
