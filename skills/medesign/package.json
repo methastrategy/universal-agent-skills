@@ -75,7 +75,8 @@
     "antigravity",
     "claude-code"
   ],
-  "author": "Metha Tripraphankit (  "license": "MIT",
+  "author": "Metha Tripraphankit",
+  "license": "MIT",
   "engines": {
     "node": ">=18.0.0"
   },

@@ -8,17 +8,26 @@ sys.stdout.reconfigure(encoding="utf-8")
 sys.stderr.reconfigure(encoding="utf-8")
 
 def get_brain_dir():
-    return r"~\.gemini\antigravity\brain"
+    """Returns the absolute path to the brain directory, expanding ~ correctly cross-platform."""
+    return os.path.expanduser(os.path.join("~", ".gemini", "antigravity", "brain"))
 
 def get_latest_conversation(brain_dir):
-    dirs = [d for d in glob.glob(os.path.join(brain_dir, "*")) if os.path.isdir(d) and not d.endswith("tempmediaStorage")]
-    if not dirs:
+    """Find the most recently modified conversation directory. Handles both Antigravity and Claude Code transcript structures."""
+    if not os.path.isdir(brain_dir):
         return None
+    dirs = [d for d in glob.glob(os.path.join(brain_dir, "*"))
+            if os.path.isdir(d) and not os.path.basename(d).startswith(".")]
     valid_dirs = []
     for d in dirs:
-        tpath = os.path.join(d, ".system_generated", "logs", "transcript.jsonl")
-        if os.path.exists(tpath):
-            valid_dirs.append((d, os.path.getmtime(tpath)))
+        # Support both Antigravity and Claude Code transcript paths
+        candidate_paths = [
+            os.path.join(d, ".system_generated", "logs", "transcript.jsonl"),
+            os.path.join(d, "transcript.jsonl"),
+        ]
+        for tpath in candidate_paths:
+            if os.path.exists(tpath):
+                valid_dirs.append((d, os.path.getmtime(tpath)))
+                break
     if not valid_dirs:
         return None
     valid_dirs.sort(key=lambda x: x[1], reverse=True)

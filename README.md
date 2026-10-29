@@ -60,20 +60,36 @@ flowchart TD
 
 ---
 
-## ⚡ 1-Click Quick Installation
+## ⚡ 1-Click Multi-Agent Installation (v2.0)
 
 Install all 22 skills and cognitive rules into your agent environment in seconds:
+
+### Supported AI Agent Platforms
+| Target | CLI Flag | Destination / Setup |
+| :--- | :--- | :--- |
+| **Google Antigravity 2.0** | `antigravity` (default) | `~/.gemini/config/skills/` + global rules |
+| **Claude Code** | `claude` | `.claude/skills/` + `CLAUDE.md` |
+| **OpenAI Codex / o3 / GPT** | `codex` | `.codex/skills/` + `AGENTS.md` |
+| **Cursor IDE** | `cursor` | `.cursor/skills/` + `.cursorrules` |
+| **Windsurf IDE** | `windsurf` | `.windsurf/skills/` + `.windsurfrules` |
+| **OpenClaw / Generic Agent** | `openclaw` | `.agents/skills/` + `.agents/rules/AGENTS.md` |
+| **All Platforms** | `all` | Configures all environments simultaneously |
 
 ### Windows (PowerShell)
 ```powershell
 # Default: Installs into Google Antigravity (~/.gemini/config/skills)
 .\install.ps1
 
-# Install for Cursor IDE (creates .cursor/skills & .cursorrules)
-.\install.ps1 -Target cursor
-
-# Install for Claude Code (creates .claude/skills & CLAUDE.md)
+# Install for specific agents
 .\install.ps1 -Target claude
+.\install.ps1 -Target codex
+.\install.ps1 -Target cursor
+.\install.ps1 -Target windsurf
+.\install.ps1 -Target openclaw
+.\install.ps1 -Target all
+
+# Preview installation without modifying files
+.\install.ps1 -Target all -DryRun
 ```
 
 ### macOS / Linux (Bash)
@@ -81,28 +97,27 @@ Install all 22 skills and cognitive rules into your agent environment in seconds
 # Default: Installs into Google Antigravity (~/.gemini/config/skills)
 chmod +x install.sh && ./install.sh
 
-# Install for Cursor IDE
-./install.sh cursor
-
-# Install for Claude Code
+# Install for specific agents
 ./install.sh claude
+./install.sh codex
+./install.sh cursor
+./install.sh windsurf
+./install.sh openclaw
+./install.sh all
+
+# Preview installation
+./install.sh all --dry-run
 ```
 
+### Antigravity Native Plugin Support
+This repository includes a root `plugin.json` manifest. You can link or copy this entire repository as an Antigravity Plugin into `~/.gemini/config/plugins/universal-agent-skills/` or use `/plugin` to manage it directly.
+
 ### Manual Directory Placement
-
-### 1. In Google Antigravity 2.0
-Clone or copy the `skills/` directory into:
-- Windows: `C:\Users\<YourUsername>\.gemini\config\skills\`
-- Linux / macOS: `~/.gemini/config/skills/`
-
-### 2. In Cursor / Windsurf
-Copy `rules/AGENTS.md` to your project root or add to `.cursorrules` / `.windsurfrules`.
-
-### 3. In Claude Code
-Link `rules/AGENTS.md` directly into your `CLAUDE.md`.
-
-### 4. In Custom Agent Workflows (LangGraph / n8n / AutoGen)
-See [`docs/FLOWS_AND_WORKFLOWS.md`](docs/FLOWS_AND_WORKFLOWS.md) for how to wire individual skills as specialized subagents.
+- **Google Antigravity 2.0:** Copy `skills/` to `~/.gemini/config/skills/` and `rules/AGENTS.md` to `~/.gemini/AGENTS.md`.
+- **Claude Code:** Copy `skills/` to `.claude/skills/` and reference `rules/CLAUDE.md`.
+- **OpenAI Codex / o3:** Copy `skills/` to `.codex/skills/` and copy `rules/CODEX.md` to project root as `AGENTS.md`.
+- **Cursor / Windsurf:** Copy `skills/` to `.cursor/skills/` or `.windsurf/skills/` and copy directives to `.cursorrules` / `.windsurfrules`.
+- **LangGraph / n8n / AutoGen Orchestrators:** See [`docs/FLOWS_AND_WORKFLOWS.md`](docs/FLOWS_AND_WORKFLOWS.md) for treating each skill as a specialized subagent prompt.
 
 ---
 
