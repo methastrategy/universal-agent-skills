@@ -101,6 +101,7 @@ When applying this skill (`/jev`), format triages with high density:
 | Component | Path | Description |
 | :--- | :--- | :--- |
 | **Local Kev Runner** | [local-kev-runner.md](references/local-kev-runner.md) | คู่มือรันโมเดล `jaredpalmer/kev` บนพอร์ต 8009 (MLX/CUDA) เพื่อทำ System 1 Triaging 100% Offline |
+| **6-Vector Bug Radar** | [six-vector-bug-radar.md](references/six-vector-bug-radar.md) | เรดาร์สแกนบั๊ก 6 ด้าน + Closed-Loop Autonomous Repair Gate |
 
 ---
 
@@ -109,3 +110,12 @@ When applying this skill (`/jev`), format triages with high density:
 เมื่องานมีหลายโมดูลอิสระทำคู่ขนานได้ — ประเมินด้วย Jev แล้ว Dispatch Swarm ตาม **3-Tier Cognitive Budget Routing** (Flash Scout → Inherit Workhorse → Pro Deep Architect) พร้อม **Scope Manifest** ให้ทุก Subagent ก่อนเริ่ม และรับ Judge Scorecard กลับมาก่อน Merge เสมอ
 
 ดูรายละเอียด Scope Invariant, Routing Table, และตัวอย่าง Dispatch: [swarm-dispatch.md](references/swarm-dispatch.md)
+
+---
+
+## 7. 6-Vector Pre-Flight Bug Radar
+
+เมื่อเขียนโค้ดเสร็จหรือมี Patch ก่อนรัน Integration Tests — สแกนผ่าน 6 มิติความเสี่ยงทันที:
+- `bug_logic_edge`, `bug_null_exception`, `bug_memory_resource`, `bug_concurrency_race`, `bug_security`, `bug_regression`
+- หากผลลัพธ์เป็น `CRITICAL_FIX_REQUIRED` (Severity $\ge 1.50$ หรือมี `suspect_locations`) ให้ Agent ลงมือแก้ทันทีแบบ Self-Healing แล้วสแกนซ้ำจนกว่าจะได้ `APPROVED (clean)` แล้วจึงรันเทสต์จริง
+- ดูรายละเอียด Scorecard, Thresholds, และ Closed-Loop Protocol: [six-vector-bug-radar.md](references/six-vector-bug-radar.md)

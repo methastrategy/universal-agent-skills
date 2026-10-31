@@ -56,8 +56,9 @@ description: "[สร้างและเขียนโค้ด] พัฒน
 - **Discriminated Union:** คืนค่า `{ success: true, data } | { success: false, error, fieldErrors }`
 - **Deterministic Contracts:** ฟังก์ชัน LLM Classifier ต้องครอบด้วย Typed Schema (Pydantic / Zod) ห้าม Parse Free-text
 
-### 4. ด่านตรวจสอบความสมบูรณ์ (Compilation & Health-Check)
-ก่อนส่งมอบงาน ต้องรันการตรวจสอบ 3 ประการเสมอ:
+### 4. ด่านตรวจสอบความสมบูรณ์ (Pre-Flight Radar & Compilation Gate)
+ก่อนส่งมอบงานหรือรัน Test Suite ขนาดใหญ่ ต้องผ่าน 4 ด่านตามลำดับ:
+0. **Pre-Flight 6-Vector Radar:** รันเรดาร์สแกนบั๊ก 6 ด้าน (Logic, Null, Resource, Race, Security, Regression ตาม `/jev`) ต้องได้สถานะ `APPROVED (clean)` หากได้ `CRITICAL_FIX_REQUIRED` ให้ Self-Heal ในทันทีก่อน
 1. `git status` — ยืนยันว่าไม่มีไฟล์แปลกปลอมหลุดออกไป
 2. `tsc --noEmit` (หรือ linter ประจำโปรเจกต์) — ผ่านโดยไม่มี Type Error
 3. `test suite` (`vitest` / `pytest` / `npm test`) — ทุกเทสต์ต้องเป็นสีเขียว (Pass 100%)
