@@ -104,7 +104,7 @@ stop.set()
 ## 4. ตั้งชื่อและเก็บ report
 
 - ชื่อไฟล์ต้องเป็น `<ea_id>_12M02_Annual_Cycle_2.html` / `<ea_id>_2Y.html` เพื่อให้ provenance matcher จับคู่ด้วย **id** ได้
-  (การ match ด้วย basename ของ `.mq5` ใช้ไม่ได้เมื่อหลาย EA ใช้ไบนารีร่วมกัน — ดู `ea-dashboard-verification` → `references/provenance-audit.md` §3)
+  (การ match ด้วย basename ของ `.mq5` ใช้ไม่ได้เมื่อหลาย EA ใช้ไบนารีร่วมกัน — ดู skill `ea-dashboard-verification` §3 (provenance audit))
 - ย้ายไฟล์จาก data dir เข้า `reports/<stem>_benchmark/` แล้ว commit เข้า repo ที่ track `reports/` — flag `verified` ที่ชี้ไปยังไฟล์
   ที่ไม่ได้ commit จะขาดหลักฐานทันทีที่ย้ายเครื่อง
 
@@ -113,6 +113,7 @@ stop.set()
 | อาการใน report | ความหมาย |
 |---|---|
 | `History Quality: 100% real ticks`, `Ticks` หลักสิบล้าน | ข้อมูลจริงครบ ใช้ได้ |
+| `Ticks:` หลักแสนในหน้าต่าง 30 วัน H1 | น่าจะยังเป็น `Model=1` (1-min OHLC) — พิสูจน์ด้วยการรันหน้าต่างเดียวกัน 2 ครั้ง (`Model=1` แล้ว `Model=4`) และเทียบจำนวน tick (วัดจริง: 127,236 vs 6,049,830 = ×47) |
 | `Bars:` น้อยกว่าที่หน้าต่างควรมีมาก + `DD ≈ 100%` | บัญชีถูกล้าง tester หยุดเอง ผลครอบคลุมแค่ช่วงแรก |
 | `Total Trades: 0` | EA เงียบในหน้าต่างนั้น — เป็นผลจริง ไม่ใช่ parse พลาด |
 | `Equity Drawdown Maximal: 30.64 (41.32%)` | ตัวเลขแรกคือเงิน ตัวในวงเล็บคือ % ที่ต้องเก็บ |

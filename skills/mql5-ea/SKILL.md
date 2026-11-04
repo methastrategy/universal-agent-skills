@@ -25,6 +25,8 @@ description: "พัฒนา คอมไพล์ ตรวจสอบ แล
 | **มีคำว่า "sweep", "กวาดพารามิเตอร์", "matrix sweep"** | **Full-Dimensional Matrix Sweep** | `python scripts/matrix_lab/matrix_engine.py --full-sweep <EA>` |
 | **มีคำว่า "คอมไพล์", "compile", "บิลด์", "ex5"** | **MetaEditor CLI Compilation** | MetaEditor CLI compile & log verification |
 | **มีคำว่า "sync", "meahub", "อัปเดตเว็บ", "manifest"** | **MeaHub Manifest & Preset Sync** | `python scripts/matrix_lab/sync_manifest_4h.py` + vitest |
+| **มีคำว่า "สกรีน", "screen", "คัดทั้งกอง", "EA01-EA80"** | **OOS-gated Fleet Screen** | `python scripts/matrix_lab/screen_ea01_ea80.py` |
+| **มีคำว่า "fractal", "จุดกลับตัว", "swing", "sweep", "reclaim"** | **Structural / Fractal Labs** | `python scripts/research_lab/fractal_lab.py` |
 
 ### B. Interactive Cockpit Gate (เมื่อพิมพ์สั่งสั้นๆ เช่น "รัน EA", "เทสหน่อย", หรือพิมพ์ `/mql5-ea` เปล่า)
 AI ต้องไม่พิมพ์ถามกลับเป็นข้อความยาว แต่ต้องเรียกใช้เครื่องมือ `ask_question` ทันทีเพื่อให้ผู้ใช้คลิกเลือก:
@@ -81,3 +83,5 @@ AI ต้องไม่พิมพ์ถามกลับเป็นข้�
 - **การตรวจชันสูตรและกู้คืน EA เก่า:** อ่าน `references/legacy-ea-audit-protocol.md`
 - **โมดูลตัวกรองความเสี่ยงก่อนส่งคำสั่ง:** อ่าน `references/pre-execution-gate-pattern.md`
 - **การวิเคราะห์ความทนทานเชิงปริมาณ:** อ่าน `references/quant-robustness.md`
+- **การคัดกรองความได้เปรียบระดับสัญญาณและด่าน OOS:** อ่าน `references/signal-validation-and-oos-gates.md`
+- **โครงสร้าง Fractal และจุดกลับตัวของราคา:** อ่าน `references/fractal-structural-detection.md`
