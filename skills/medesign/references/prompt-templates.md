@@ -41,9 +41,31 @@
 
 ---
 
+## 4. Vibe Coding 5 มิติ (สูตร 5 เสาหลัก สวยไม่ซ้ำใคร)
+
+```
+/medesign vibe
+โปรดักต์ / งาน: [ชื่อสินค้า บริการ หรือหน้าเว็บที่ต้องการทำ]
+กลุ่มเป้าหมาย: [ใครใช้]
+โทน & อารมณ์ (recent.design): [อธิบายสไตล์ ฟอนต์ มู้ด หรือแนบรูปแคป]
+โครงสร้างหน้า (Mobbin): [hero · ฟีเจอร์ 3 ข้อ · ราคา 3 แพ็กเกจ · FAQ · CTA ติดต่อ]
+Hero Component (21st.dev): [วางพรอมต์คอมโพเนนต์จาก 21st.dev หรือระบุลูกเล่น]
+UI Primitives: ใช้ shadcn/ui (Button, Card, Accordion, Badge, Dialog)
+ชุดสี (Coolors - ระบุบทบาท):
+- พื้น (Background): [#xxxxxx]
+- กล่อง (Surface): [#xxxxxx]
+- สีหลัก (Primary): [#xxxxxx]
+- ตัวหนังสือ (Text): [#xxxxxx] (Contrast Ratio >= 4.5:1 WCAG AA)
+- ปุ่มเด่น (Accent CTA): [#xxxxxx]
+ฟอนต์: "Inter", "IBM Plex Sans Thai", sans-serif (line-height ไทย >= 1.7)
+มาตรฐาน: 44px touch targets, mobile-first รองรับความกว้าง 375px
+```
+
+---
+
 ## สำหรับผู้ดูแล SKILL.md: กฎ routing ที่ต้องเพิ่ม
 
-1. ลำดับความสำคัญ: คำสั่ง `/medesign new`, `revamp`, `like` ที่ผู้ใช้พิมพ์ ชนะตาราง auto-detect ทุกกรณี
+1. ลำดับความสำคัญ: คำสั่ง `/medesign new`, `revamp`, `like`, `vibe` ที่ผู้ใช้พิมพ์ ชนะตาราง auto-detect ทุกกรณี
 2. คำว่า "รีดีไซน์" ในข้อความธรรมดา ห้ามส่งเข้า `audit` อัตโนมัติ ให้ผ่าน `references/brief-intake.md` ข้อ 0 เพื่อล็อกโหมดก่อน
 3. `audit` เหลือไว้เป็นเครื่องมือตรวจของเดิมเท่านั้น (เรียกเองด้วย `/medesign audit` หรือถูกเรียกต่อจาก `revamp`)
 4. ในตารางใดๆ ห้ามใช้ `|` ในโค้ด ให้เขียน `web หรือ mobile` หรือ `{a,b,c}` แทน

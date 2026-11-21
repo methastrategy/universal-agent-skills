@@ -31,12 +31,13 @@ description: "ออกแบบ UI/UX เว็บ/แอป และสื่
 | `/medesign mockup` | สร้างภาพต้นแบบ Mockup (Web/Mobile) | `references/image-mockup-direction.md` |
 | `/medesign to-code` | แปลงภาพ Mockup เป็นโค้ดจริงระดับ Production | `references/image-to-code.md` -> `quality-gate.md` |
 | `/medesign snapshot` | จับภาพเรนเดอร์จริง High-DPI (Mobile, Tablet, Desktop) | `references/modern-craft-invariants.md` |
+| `/medesign vibe` | Vibe Coding 5 มิติ (Tone, Layout, Micro-UI, Primitives, 5-Role Color) | `references/vibe-coding-pipeline.md` -> `prompt-templates.md` |
 
 ---
 
 ## 2. ลำดับความสำคัญในการเลือกโหมด (Mode Precedence Hierarchy)
 
-1. **คำสั่งชัดเจนชนะทุกกรณี:** `/medesign new`, `/medesign revamp`, `/medesign like` ข้ามการเดาทั้งหมด แล้วเข้าสู่ `references/brief-intake.md` ทันที
+1. **คำสั่งชัดเจนชนะทุกกรณี:** `/medesign new`, `/medesign revamp`, `/medesign like`, `/medesign vibe` ข้ามการเดาทั้งหมด แล้วเข้าสู่ `references/brief-intake.md` ทันที
 2. **การอนุมานเมื่อไม่ได้ระบุโหมด:** อิงตาม `references/brief-intake.md` (อ้างอิงแบรนด์ -> `like`, มีโค้ดเดิม -> `revamp`, ทำใหม่หมด -> `new`)
 3. **โหมด audit:** ตรวจจับจุดบกพร่อง/AI Tells ในหน้าเดิม (เมื่อสั่ง `/medesign audit` หรือถูกเรียกต่อจาก `revamp`)
 4. **Interactive Cockpit Gate:** เมื่อสั่ง `/medesign` เปล่า ให้เปิด `ask_question` ให้เลือกหมวดหมู่งานทันที
@@ -46,7 +47,7 @@ description: "ออกแบบ UI/UX เว็บ/แอป และสื่
 ## 3. Execution Protocol (5 ขั้นตอนมาตรฐาน)
 
 1. **Step 0 — Brief Intake Gate (`references/brief-intake.md`):**
-   - บรรทัดแรกของคำตอบต้องประกาศ `โหมด: new` (หรือ `revamp` / `like`) เสมอ
+   - บรรทัดแรกของคำตอบต้องประกาศ `โหมด: new` (หรือ `revamp` / `like` / `vibe`) เสมอ
    - สรุป Brief 5 ช่อง และเสนอ 2 ทิศทางสั้นๆ (Direction A ใกล้ brief / Direction B ต่างชัดเจน ไม่เกิน 5 บรรทัดต่อทิศทาง)
    - *One-Shot Alignment:* หาก Brief ครบ เสนอทิศทางทันที; หากไม่ครบ ถาม $\le 3$ คำถาม พร้อม Direction ชั่วคราว (ตอบ "ok" = เลือก A)
    - *Escape Hatch:* ข้ามได้ทันทีเมื่อผู้ใช้ระบุ "ลุยเลย" หรือแก้งาน "จุดเล็ก" ($\le 1$ ไฟล์ และไม่เปลี่ยน layout/สี/ฟอนต์)
