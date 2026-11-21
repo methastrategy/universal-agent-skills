@@ -15,8 +15,34 @@ Seamlessly pick up where the previous turn left off without hallucinating, witho
 
 ## Execution Sequence
 
+### Phase 0 — Project Context Detection (PRIMARY — ALWAYS RUN FIRST)
+
+**Before reading any handoff file, determine which AGY Project this conversation belongs to:**
+
+1. **CWD = Project Identity:**
+   - The `Command Working Directory` in the system prompt IS the project. Read it immediately.
+   - e.g. `m:\Personal\ME_REPO\kuloykrathong-web` → this is a `kuloykrathong-web` conversation; focus on that repo and nothing else.
+   - If CWD is `~` (home/no project) → proceed to Cross-Device Handoff below.
+
+2. **Project-Scoped Git Telemetry (run immediately when CWD has a git repo):**
+   ```
+   git log -5 --oneline      → what was last worked on
+   git status                → any unstaged changes
+   git stash list            → any stashed WIP
+   git branch -a             → active feature branches
+   ```
+   This IS the ground truth. Report these 5 lines as the project status header instantly.
+
+3. **Project-Scoped Transcript Scan:**
+   - If `plan.md` or `walkthrough.md` exist in the artifact directory for this conversation ID, read them.
+   - Otherwise scan only the **current conversation's** transcript (the active Conversation ID), not other conversations.
+
+4. **Cross-Device Handoff (SECONDARY — only when CWD has no git OR user mentions "ต่อจากโน้ตบุ๊ก"/"ต่อจากคอมบ้าน"):**
+   - Only then read `G:\My Drive\01_Academic_KU\AGY_SYNC\LATEST_CROSS_DEVICE_HANDOFF.md`
+   - Run `git pull --ff-only` on the project if the handoff is from a different machine and timestamp < 48h
+
 ### Phase 1: Context & State Introspection
-0. **Handoff:** อ่าน `D:\WSL\.gemini\handoffs\latest-<ชื่อ workspace ปัจจุบัน>.md` ถ้ามี ใช้เมื่อ header `workspace:` ตรงกับ workspace ปัจจุบันและ `created` ไม่เกิน 48 ชม.; ไม่ตรงหรือเก่ากว่านั้น → บอกผู้ใช้แล้วถามก่อน แจ้งเสมอว่าอ่านไฟล์ไหน และตรวจสถานะจริงของไฟล์/คำสั่งที่ระบุก่อนทำต่อ
+0. **Local Handoff (if applicable):** อ่าน `D:\WSL\.gemini\handoffs\latest-<ชื่อ workspace ปัจจุบัน>.md` ถ้ามี ใช้เมื่อ header `workspace:` ตรงกับ workspace ปัจจุบันและ `created` ไม่เกิน 48 ชม.; ไม่ตรงหรือเก่ากว่านั้น → บอกผู้ใช้แล้วถามก่อน
 1. **Read Continuation Context & Transcript:**
    - Inspect the recent conversation summary, user's latest prompt, and last planner response.
    - Read active tracking artifacts in the artifact directory, especially `plan.md` and `walkthrough.md`.
