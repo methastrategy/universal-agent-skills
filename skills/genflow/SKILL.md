@@ -88,6 +88,7 @@ flowchart TD
 - **`references/deterministic-av-pipeline.md`**: ทฤษฎี DSP สังเคราะห์เสียงคณิตศาสตร์ และสัญญาเรนเดอร์ WebGL
 - **`references/nextgen-dsp-and-webcodecs.md`**: สถาปัตยกรรม WebCodecs Zero-IPC และ PolyBLEP Supersaw
 - **`references/hyperframes-code-video.md`**: สถาปัตยกรรมสร้างวิดีโอจากโค้ด HTML/CSS/GSAP ด้วย Headless Frame-by-Frame (HyperFrames Protocol)
+- **`references/motion-graphics-20-stack.md`**: สถาปัตยกรรม 20 Open-Source Repos สตูดิโอ Motion Graphics, Three.js 3D, Librosa Audio-Reactive, WhisperX, Remotion vs HyperFrames
 
 ---
 
