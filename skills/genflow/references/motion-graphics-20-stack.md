@@ -87,9 +87,11 @@ flowchart TD
 | :--- | :--- | :--- | :--- |
 | **SaaS Landing / Explainer** | **HyperFrames (DOM + GSAP)** | เบาที่สุด ไม่ต้องพึ่ง Node/React หนักๆ เรนเดอร์ตัวหนังสือคมชัด 100% | GSAP + Virtual Clock |
 | **Data-Driven / Dynamic Video** | **Remotion (React)** | ต้องการ Loop ข้อมูลจาก API, Component ซ้ำๆ, จัดการ State ซับซ้อน | Remotion + Tailwind |
+| **Interactive Tech / Vector Explainer** | **Motion Canvas (TypeScript)** | ใช้ Generator `yield*` คุมจังหวะทีละสเต็ป พร้อม Vite Live Editor คล้าย YouTube Dev Channels (MIT Free) | Motion Canvas + Canvas2D |
+| **Artistic Code-Film (99 สไตล์)** | **Lemo-Opuscar Pattern** | สร้างภาพยนตร์สั้นด้วยโค้ด 100% (Pixel Art, 80s Anime, Watercolor) ไม่พึ่ง Neural Diffusion | HTML5 Canvas + WebGL + FFmpeg |
 | **3D Sci-Fi / Kinetic Product** | **Three.js + Rapier** | ฟิสิกส์ 3D จริง, เงาสะท้อน, แสงกระทบวัตถุ | Three.js + Postprocessing |
 | **คณิตศาสตร์ / อธิบายทฤษฎี** | **Manim (Python)** | พล็อตสมการเวกเตอร์ เรขาคณิต กราฟเส้นโค้งแม่นยำสูง | Manim + LaTeX |
-| **TikTok / Reels Auto-Subtitle** | **WhisperX + HyperFrames** | ตัวหนังสือเด้งตามจังหวะพูดระดับคำต่อคำ (Word-level Sync) | WhisperX + FFmpeg |
+| **TikTok / Reels Auto-Subtitle (Genhaha)** | **WhisperX + HyperFrames** | ตัวหนังสือภาษาไทยเด้งตามจังหวะพูดระดับคำต่อคำ (Word-level Sync 9:16) | WhisperX + FFmpeg |
 
 ---
 
@@ -102,3 +104,27 @@ flowchart TD
    - การแสดงผลรายการหรือตัวอักษรทีละตัว ต้องมี Delay เหลื่อมกันระหว่าง 40ms ถึง 80ms (ห้ามต่ำกว่า 20ms เพราะตามองไม่ทัน และห้ามเกิน 150ms เพราะจะดูช้า)
 3. **Audio Beat Synchronization:**
    - เหตุการณ์สำคัญ (Scene Transition, Impact) ต้องล็อกกับ Timecode ของ Kick/Beat จาก `librosa` หรือ `timeline.json` ห้ามแอนิเมชันลอยแบบไม่ตรงจังหวะเพลง
+
+---
+
+## 5. เข็มทิศสำหรับมือใหม่: ไม่ต้องติดทุกสกิลให้รกสมอง (The Zero-Skill Mindset)
+
+> [!TIP]
+> **กฎแห่งความเรียบง่าย (สหโชค เพียรการ Law):**
+> *"Skill ในโลกของ AI Agent มันคือแค่ 'คู่มือให้ AI อ่าน' อย่าบ้าติดตั้งทุกอย่างลงในเครื่องจน Context บวม ให้เริ่มต้นจากชิ้นงานและสไตล์ที่อยากได้ก่อนเสมอ"*
+
+```mermaid
+flowchart TD
+    Q1["1. อยากทำคลิปแบบไหน?"] --> C1{"เลือกเส้นทาง"}
+    C1 -->|คลิปสั้น TikTok/Reels เล่าเรื่อง| P1["Genhaha / WhisperX + TTS<br/>(สคริปต์ + เสียงไทย + ซับเด้ง)"]
+    C1 -->|วิดีโออธิบายโค้ด / กราฟิกเวกเตอร์| P2["Motion Canvas / HyperFrames<br/>(เขียนสคริปต์ทีละขั้น ภาพคมชัด)"]
+    C1 -->|อนิเมะ ละครสั้น สไตล์ศิลปะเฉพาะ| P3["Lemo-Opuscar Pattern<br/>(เลือก 1 ใน 99 สไตล์ สั่งเรนเดอร์ด้วยโค้ด)"]
+    C1 -->|ระบบเจนวิดีโอจำนวนมากจากฐานข้อมูล| P4["Remotion<br/>(ต่อ React Components วนลูปข้อมูล)"]
+
+    P1 & P2 & P3 & P4 --> Minimal["Zero-Skill Workflow:<br/>1. แคปภาพหรือคลิป Reference มา 1 คลิป<br/>2. สั่ง AI แกะ Style & Motion Brief<br/>3. ให้ AI เขียนโค้ด HTML/Canvas + รัน FFmpeg เรนเดอร์ตรง"]
+```
+
+### เคล็ดลับการเริ่มสำหรับมือใหม่ (3 ขั้นตอนจบ):
+1. **อย่าค้นมั่วใน GitHub:** เลือก 1 เครื่องมือหลักที่ตรงกับงาน (เช่น งานสอนเลือก `Motion Canvas`, งานเว็บเลือก `HyperFrames/GSAP`, งานคลิป TikTok เลือก `Genhaha/WhisperX`)
+2. **ใช้ Reference Clip แทนการเขียนพรอมต์ลอยๆ:** แคปหน้าจอหรือแนบคลิปตัวอย่างที่ชอบ ให้ AI วิเคราะห์องค์ประกอบ (Layout, Spacing, Speed) ออกมาเป็นกฎ
+3. **พึ่งพา FFmpeg เป็นกระดูกสันหลัง:** ไม่ว่าจะเขียนโค้ดด้วยภาษาใด สุดท้ายใช้ FFmpeg เป็นตัวรวมภาพและเสียงเข้าด้วยกันเสมอ
