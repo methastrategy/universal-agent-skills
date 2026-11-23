@@ -41,6 +41,14 @@ md5sum <artifact>; git show HEAD:<artifact> | md5sum                 # byte-iden
 
 ---
 
+## Differential Parity Harness (Record-and-Replay Guard)
+When refactoring algorithmic hot paths or migrating logic across modules:
+- **Record before mutation**: Log live runtime I/O to a fixture file (`inputs.jsonl`).
+- **Differential Verification**: Replay both old and new implementations against identical fixtures. Require 100% exact parity (zero float drift, identical return structures).
+- **Benchmark Gate**: For performance refactors, attach verbatim benchmark execution output comparing old vs new latency/throughput before claiming speedups.
+
+---
+
 ## Large-File Extraction Mechanics (files over ~800 lines)
 
 Extracting a helper out of a 2,000-line component is a different exercise from editing a small module. The
