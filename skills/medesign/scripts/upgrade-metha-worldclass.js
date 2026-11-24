@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 const repos = [
-  './projects/medesign',
-  '~/.gemini/config/skills/medesign'
+  'D:/METHA/Projects/medesign',
+  'C:/Users/hotme/.gemini/config/skills/medesign'
 ];
 
 // 1. Update presets/metha/guidelines.md

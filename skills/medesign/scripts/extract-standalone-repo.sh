@@ -44,7 +44,7 @@ rm -rf "$TARGET_DIR/dist" "$TARGET_DIR/tests/sarif-2.1.0.schema.json" || true
 find "$TARGET_DIR" -type f -name "*.bak" -delete || true
 
 echo -e "\n[3/5] Performing Deep Privacy & Path Scrubbing Scan..."
-if grep -rnE "developer|handoffs|C:\\Users" "$TARGET_DIR" --exclude="extract-standalone-repo.*" 2>/dev/null; then
+if grep -rnE "hotme|handoffs|C:\\Users" "$TARGET_DIR" --exclude="extract-standalone-repo.*" 2>/dev/null; then
   echo "Privacy violation detected! Extraction halted."
   exit 1
 fi

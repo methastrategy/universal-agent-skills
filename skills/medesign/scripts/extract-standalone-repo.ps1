@@ -1,5 +1,5 @@
 param (
-    [string]$TargetDir = "./projects\medesign"
+    [string]$TargetDir = "D:\METHA\Projects\medesign"
 )
 
 $ErrorActionPreference = "Stop"
@@ -98,7 +98,7 @@ Write-Host "  [OK] Whitelist copied and temporary artifacts purged." -Foreground
 # Step 3: Deep Scan for Leaked Paths and Privacy Scrubbing
 Write-Host ""
 Write-Host "[3/5] Performing Deep Privacy and Path Scrubbing Scan..." -ForegroundColor Yellow
-$leakFindings = Get-ChildItem -Path $TargetDir -Recurse -File | Where-Object { $_.Name -notmatch "extract-standalone-repo" } | Select-String -Pattern "developer|handoffs|C:\\Users" -ErrorAction SilentlyContinue
+$leakFindings = Get-ChildItem -Path $TargetDir -Recurse -File | Where-Object { $_.Name -notmatch "extract-standalone-repo" } | Select-String -Pattern "hotme|handoffs|C:\\Users" -ErrorAction SilentlyContinue
 if ($leakFindings) {
     Write-Host "  Leak findings detected in target:" -ForegroundColor Red
     foreach ($item in $leakFindings) {

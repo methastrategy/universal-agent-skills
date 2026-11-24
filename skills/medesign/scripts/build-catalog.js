@@ -666,7 +666,7 @@ const targetPath = path.join(__dirname, '..', 'references', 'catalog.json');
 fs.writeFileSync(targetPath, JSON.stringify(catalog, null, 2) + '\n', 'utf8');
 
 // Also keep Antigravity skill directory synchronized if present
-const skillCatalogPath = '~/.gemini/config/skills/medesign/references/catalog.json';
+const skillCatalogPath = 'C:/Users/hotme/.gemini/config/skills/medesign/references/catalog.json';
 if (fs.existsSync(path.dirname(skillCatalogPath))) {
   fs.writeFileSync(skillCatalogPath, JSON.stringify(catalog, null, 2) + '\n', 'utf8');
 }

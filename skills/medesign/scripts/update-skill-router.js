@@ -39,7 +39,7 @@ description: "ออกแบบ UI/UX เว็บ/แอป และสื่
 | **ปรับปรุงเว็บเก่า (Retrofit 3-Tier)** | \`references/web-retrofit-protocol.md\` -> \`references/quality-gate.md\` |
 | **ความสมูท 120fps & Motion** | \`references/compositor-smoothness.md\` + \`references/motion-tokens.md\` |
 | **สไตล์ Preset พิเศษ** (\`apple\` / \`tesla\`) | \`presets/{name}/guidelines.md\` + \`presets/{name}/design-tokens.css\` |
-| **Metha Cockpit / MESURV DNA** (Opt-in) | \`references/mesurv-dna.md\` (รันเฉพาะสั่ง \`/medesign metha\` หรือใน \`./workspace/\`) |
+| **Metha Cockpit / MESURV DNA** (Opt-in) | \`references/mesurv-dna.md\` (รันเฉพาะสั่ง \`/medesign metha\` หรือใน \`D:/METHA/\`) |
 | **รัน Test Suite & Browser Audit** | \`node tests/runner.js\` หรือ \`node tests/browser-audit.js\` |
 
 ---
@@ -84,7 +84,7 @@ description: "ออกแบบ UI/UX เว็บ/แอป และสื่
 2. **Step 1 — Triage Stack:** ตรวจสอบเทคโนโลยีปลายทาง (Tailwind, Pure CSS, React, Next.js, HTML)
 3. **Step 2 — Token Injection:**
    - **Neutral Craft (Default):** อ้างอิง 73 แบรนด์ หรือ 38 Archetypes และ Closed Spacing (2, 4, 8, 12, 16, 24, 32, 48, 64, 96, 128px)
-   - **Personal DNA (Opt-in):** ใช้ \`user-profile.json\` หรือ \`references/mesurv-dna.md\` เฉพาะเมื่อรันใน Workspace \`./workspace/\` หรือเมื่อสั่ง \`/medesign metha\` / \`/medesign auto\`
+   - **Personal DNA (Opt-in):** ใช้ \`user-profile.json\` หรือ \`references/mesurv-dna.md\` เฉพาะเมื่อรันใน Workspace \`D:/METHA/\` หรือเมื่อสั่ง \`/medesign metha\` / \`/medesign auto\`
 4. **Step 3 — Build & Deliver:** ส่งโค้ดที่สมบูรณ์ ไร้ Placeholders พร้อมรายงาน Visual Highlights สั้นๆ
 5. **Step 4 — Quality Gate:** ตรวจสอบกับ \`references/quality-gate.md\` (Squint Test, Grayscale, 10-State Matrix) ปิดท้ายด้วย \`Gate: quality-gate.md - pass\` เสมอ
 `;
@@ -92,8 +92,8 @@ description: "ออกแบบ UI/UX เว็บ/แอป และสื่
 console.log('Total characters:', draft.length);
 console.log('Total lines:', draft.split('\n').length);
 
-const dest1 = '~/.gemini/config/skills/medesign/SKILL.md';
-const dest2 = './projects/medesign/SKILL.md';
+const dest1 = 'C:/Users/hotme/.gemini/config/skills/medesign/SKILL.md';
+const dest2 = 'D:/METHA/Projects/medesign/SKILL.md';
 
 fs.writeFileSync(dest1, draft, 'utf8');
 fs.writeFileSync(dest2, draft, 'utf8');

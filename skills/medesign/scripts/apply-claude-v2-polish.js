@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 const repos = [
-  './projects/medesign',
-  '~/.gemini/config/skills/medesign'
+  'D:/METHA/Projects/medesign',
+  'C:/Users/hotme/.gemini/config/skills/medesign'
 ];
 
 // 1. Updated brief-intake.md (v2)
@@ -287,7 +287,7 @@ description: "ออกแบบ UI/UX เว็บ/แอป และสื่
 2. **Step 1 — Triage Stack:** ตรวจสอบเทคโนโลยีปลายทาง (Tailwind, Pure CSS, React, Next.js, HTML)
 3. **Step 2 — Token Injection:**
    - **Neutral Craft (Default):** อ้างอิง 74 แบรนด์ หรือ 38 Archetypes และ Closed Spacing (2, 4, 8, 12, 16, 24, 32, 48, 64, 96, 128px)
-   - **Personal DNA Sync:** ซิงก์โปรเจกต์ MESURV / MeBoard เฉพาะเมื่อรันใน Workspace \`./workspace/\` หรือเมื่อสั่ง \`/medesign auto\`
+   - **Personal DNA Sync:** ซิงก์โปรเจกต์ MESURV / MeBoard เฉพาะเมื่อรันใน Workspace \`D:/METHA/\` หรือเมื่อสั่ง \`/medesign auto\`
 4. **Step 3 — Build & Deliver:** ส่งโค้ดที่สมบูรณ์ ไร้ Placeholders พร้อมรายงาน Visual Highlights สั้นๆ
 5. **Step 4 — Quality Gate:** ตรวจสอบกับ \`references/quality-gate.md\` (Squint Test, Grayscale, 10-State Matrix) ปิดท้ายด้วย \`Gate: quality-gate.md - pass\` เสมอ
 `;
