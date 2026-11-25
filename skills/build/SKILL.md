@@ -1,6 +1,6 @@
 ---
 name: build
-description: "[สร้างและเขียนโค้ด] พัฒนาโค้ดตามแผนด้วย TDD ที่ Seams และ Deep Modules — ใช้เมื่อมีแผนแล้วและพร้อมสร้างระบบจริง (Granular implementation, TDD at seams, React 19 actions, build verification)"
+description: "[สร้างและเขียนโค้ด] พัฒนาโค้ดตามแผนด้วย TDD ที่ Seams และ Deep Modules — ใช้เมื่อมีแผนแล้วและพร้อมสร้างระบบจริง (Granular implementation, TDD at seams, build verification)"
 ---
 
 # /build — ลงมือสร้างและพัฒนาซอฟต์แวร์ตามแผน (Implementation & Verification Hub)

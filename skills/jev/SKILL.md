@@ -1,6 +1,6 @@
 ---
 name: jev
-description: "วิเคราะห์ตัดสินใจความเร็วสูงและประเมินความเสี่ยง (Confidence Gating) — ใช้เมื่อต้องการฟันธงทางแก้ปัญหาหรือวางแผนฉับไว (Fast atomic decision triaging, speculative fan-out, confidence-gated execution)"
+description: "วิเคราะห์ตัดสินใจความเร็วสูงและประเมินความเสี่ยง (Confidence Gating) — ใช้เมื่อต้องการฟันธงทางแก้ปัญหาหรือวางแผนฉับไว (Fast atomic decision triaging, confidence-gated execution)"
 ---
 
 # /jev — High-Velocity Decision Triaging & Execution Gating

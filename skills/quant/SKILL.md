@@ -1,6 +1,6 @@
 ---
 name: quant
-description: "วิเคราะห์ตลาดการเงิน หุ้น คริปโต ด้วย Multi-Agent Debate และ Data Pipelines — ใช้เมื่อต้องการวิเคราะห์หุ้น/เหรียญ ประเมินสัญญาณพื้นฐานและเทคนิค (Quantitative financial intelligence, multi-agent debate, data pipelines)"
+description: "วิเคราะห์ตลาดการเงิน หุ้น คริปโต ด้วย Multi-Agent Debate และ Data Pipelines — ใช้เมื่อต้องการวิเคราะห์หุ้น/เหรียญ (Quantitative financial intelligence, multi-agent debate)"
 ---
 
 # /quant — Quantitative Market Intelligence & Multi-Agent Financial Engine

@@ -1,6 +1,6 @@
 ---
 name: summarize
-description: "สรุปย่อเอกสาร ไฟล์ หรือโค้ดที่ยาวให้สั้นกระชับที่สุด — ใช้เมื่อต้องการดึงเนื้อหาหลัก ใจความสำคัญ และตัวเลขสำคัญ (High-compression factual summarization of long documents, files, and codebases)"
+description: "สรุปย่อเอกสาร ไฟล์ หรือโค้ดที่ยาวให้สั้นกระชับที่สุด — ใช้เมื่อต้องการดึงเนื้อหาหลัก ใจความสำคัญ และตัวเลขสำคัญ (High-compression factual summarization of long documents)"
 ---
 
 # /summarize — High-Density Factual Summarization

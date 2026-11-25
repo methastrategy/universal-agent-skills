@@ -1,6 +1,6 @@
 ---
 name: advice
-description: "คณะที่ปรึกษาหลายมุมมองและกล่องชี้ขาดทางเลือก — ใช้เมื่อต้องตัดสินใจเรื่องยาก ลังเล ต้องการคำแนะนำรอบด้าน หรือเคาะทางออกที่ดีที่สุด (Multi-perspective advisory board, decision cockpit, interactive ask_question modal)"
+description: "คณะที่ปรึกษาหลายมุมมองและกล่องชี้ขาดทางเลือก — ใช้เมื่อต้องตัดสินใจเรื่องยาก ลังเล ต้องการคำแนะนำรอบด้าน หรือเคาะทางออกที่ดีที่สุด (Multi-perspective advisory board, decision cockpit)"
 ---
 
 # Multi-Perspective Advisory & Decision Cockpit (`/advice`)

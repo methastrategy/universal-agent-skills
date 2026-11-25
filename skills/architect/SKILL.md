@@ -1,6 +1,6 @@
 ---
 name: architect
-description: "[วางแผนสถาปัตยกรรม] วางผังระบบ ออกแบบ Deep Modules และฐานข้อมูล — ใช้เมื่อเริ่มระบบใหม่หรือปรับโครงสร้างเดิม (System architecture, deep modules, clean backend, decision tree grilling, ADR, tradeoffs)"
+description: "[วางแผนสถาปัตยกรรม] วางผังระบบ ออกแบบ Deep Modules และฐานข้อมูล — ใช้เมื่อเริ่มระบบใหม่หรือปรับโครงสร้างเดิม (System architecture, deep modules, clean backend, ADR, tradeoffs)"
 ---
 
 # /architect — ศูนย์รวมการวางแผนและสถาปัตยกรรมระบบ (Unified Planning & Architecture Hub)

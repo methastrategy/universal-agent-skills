@@ -1,6 +1,6 @@
 ---
 name: mql5-ea
-description: "พัฒนา คอมไพล์ ตรวจสอบ และรันลูป MT5 EA — ใช้เมื่อต้องการเขียนหรือปรับโค้ด EA คอมไพล์ CLI และรันลูปปรับแต่งอัตโนมัติ (MQL5 EA lifecycle: development, CLI compilation, quant edge, backtest loop)"
+description: "พัฒนา คอมไพล์ ตรวจสอบ และรันลูป MT5 EA — ใช้เมื่อต้องการเขียนหรือปรับโค้ด EA คอมไพล์ CLI และรันลูปปรับแต่งอัตโนมัติ (MQL5 EA lifecycle, CLI compilation, backtest loop)"
 ---
 
 # MQL5 Expert Advisor & Autonomous Matrix Lab (`/mql5-ea`)

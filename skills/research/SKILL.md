@@ -1,6 +1,6 @@
 ---
 name: research
-description: "วิจัยและค้นหาข้อมูล คู่มือทางการ และมาตรฐานวิศวกรรมสำรวจ — ใช้เมื่อต้องการเจาะลึกหลักการ วิธีใช้อุปกรณ์ หรือตรวจเอกสารอ้างอิง (Hybrid deep research, official manuals, engineering standards, operational guides)"
+description: "วิจัยและค้นหาข้อมูล คู่มือทางการ และมาตรฐานวิศวกรรมสำรวจ — ใช้เมื่อต้องการเจาะลึกหลักการ วิธีใช้อุปกรณ์ หรือตรวจเอกสารอ้างอิง (Hybrid deep research, official manuals)"
 ---
 
 # Hybrid Internal-External Deep Research & Mechanism Synthesis

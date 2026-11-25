@@ -1,6 +1,6 @@
 ---
 name: continue
-description: "กู้คืนงานค้าง ฟื้นฟูบริบท และทำต่อจากเดิมทันที — ใช้เมื่อแชตค้าง หลุดกลางคัน สลับโมเดล หรือ Token หมดแล้วต้องต่องาน (Seamless session recovery, context restoration, execution resumption after handoff)"
+description: "กู้คืนงานค้าง ฟื้นฟูบริบท และทำต่อจากเดิมทันที — ใช้เมื่อแชตค้าง หลุดกลางคัน สลับโมเดล หรือ Token หมดแล้วต้องต่องาน (Seamless session recovery, context restoration)"
 ---
 
 # Continue & Execution Resumption Protocol

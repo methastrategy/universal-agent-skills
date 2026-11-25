@@ -1,6 +1,6 @@
 ---
 name: explain
-description: "อธิบายโค้ด สมการ และทฤษฎียากให้เข้าใจง่าย — ใช้เมื่อต้องการให้สอน สรุปหลักการ เปรียบเทียบเห็นภาพ หรือยกตัวอย่างโค้ด (High-density technical explanation, intuitive analogies, code examples for algorithms)"
+description: "อธิบายโค้ด สมการ และทฤษฎียากให้เข้าใจง่าย — ใช้เมื่อต้องการให้สอน สรุปหลักการ เปรียบเทียบเห็นภาพ หรือยกตัวอย่างโค้ด (High-density technical explanation, code examples)"
 ---
 
 # Technical Deconstruction & Concept Explanation

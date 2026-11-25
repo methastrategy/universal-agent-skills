@@ -1,6 +1,6 @@
 ---
 name: wait-what
-description: วงจรดึงสติ เบรกงานที่เริ่มหลงทิศหรือซับซ้อนเกิน — ใช้เมื่อคำตอบเริ่มวน งานบวมโต หรือผลลัพธ์ขัดความคาดหวัง (reality check, circuit breaker, reset, stop and reassess)
+description: "วงจรดึงสติ เบรกงานที่เริ่มหลงทิศหรือซับซ้อนเกิน — ใช้เมื่อคำตอบเริ่มวน งานบวมโต หรือผลลัพธ์ขัดความคาดหวัง (reality check, circuit breaker, reset, stop and reassess)"
 ---
 
 # Wait-What (Circuit Breaker)

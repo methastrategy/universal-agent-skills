@@ -1,6 +1,6 @@
 ---
 name: analyze
-description: "วิเคราะห์ระบบ โค้ด สถาปัตยกรรม และรากเหง้าปัญหาเชิงลึก — ใช้เมื่อตรวจหาคอขวด ผ่าโครงสร้าง หรือวิเคราะห์สาเหตุแท้จริง (Deep system architecture audit, root-cause diagnostics, structural blueprint)"
+description: "วิเคราะห์ระบบ โค้ด สถาปัตยกรรม และรากเหง้าปัญหาเชิงลึก — ใช้เมื่อตรวจหาคอขวด ผ่าโครงสร้าง หรือวิเคราะห์สาเหตุแท้จริง (Deep system architecture audit, root-cause diagnostics)"
 ---
 
 # Deep System Analysis & Root-Cause Architecture (`/analyze`)

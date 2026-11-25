@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: สรุปและส่งต่องานค้างข้ามแชตหรือข้ามโมเดล — ใช้เมื่อ Token ใกล้หมด เปลี่ยนโมเดล งานยาว หรือจะหยุดทำงานชั่วคราว (session handoff, context compacting, resume)
+description: "สรุปและส่งต่องานค้างข้ามแชตหรือข้ามโมเดล — ใช้เมื่อ Token ใกล้หมด เปลี่ยนโมเดล งานยาว หรือจะหยุดทำงานชั่วคราว (session handoff, context compacting, resume)"
 ---
 
 # Handoff

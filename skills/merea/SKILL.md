@@ -1,6 +1,6 @@
 ---
 name: merea
-description: "วิเคราะห์คิดย้อนรอย ถอดรหัสกลไกต้นกำเนิด และสิ่งที่ควรจะเป็น — ใช้เมื่อแกะรอยระบบ ธุรกิจ โค้ด หรือไบนารี (Universal reverse engineering, REA binary deconstruction, backward causality)"
+description: "วิเคราะห์คิดย้อนรอย ถอดรหัสกลไกต้นกำเนิด และสิ่งที่ควรจะเป็น — ใช้เมื่อแกะรอยระบบ ธุรกิจ โค้ด หรือไบนารี (Universal reverse engineering, REA binary deconstruction)"
 ---
 
 # /merea — Universal Reverse Engineering & REA Binary Engine

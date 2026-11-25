@@ -1,6 +1,6 @@
 ---
 name: debug
-description: "แก้บั๊ก ล่าต้นตอปัญหา และซ่อมโค้ดที่พังให้หายขาด — ใช้เมื่อโค้ดพัง รันไม่ผ่าน ติด Error ค่าเพี้ยน หรือระบบทำงานผิดปกติ (Systematic defect isolation, root cause analysis, bug eradication, and regression prevention)"
+description: "แก้บั๊ก ล่าต้นตอปัญหา และซ่อมโค้ดที่พังให้หายขาด — ใช้เมื่อโค้ดพัง รันไม่ผ่าน ติด Error หรือระบบทำงานผิดปกติ (Systematic defect isolation, root cause analysis, bug eradication)"
 ---
 
 # Systematic Defect Isolation & Bug Eradication

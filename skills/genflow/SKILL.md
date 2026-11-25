@@ -1,6 +1,6 @@
 ---
 name: genflow
-description: "[ผลิตสื่อมัลติมีเดีย] สตูดิโอรวมผู้กำกับ AI และโมชันวิดีโอ 3D ด้วยโค้ด — ใช้เมื่อสร้างคลิป ละครสั้น สตอรี่บอร์ด หรือแอนิเมชัน 3D (Autonomous AI director, code-video, motion graphics, WebGL DSP)"
+description: "[ผลิตสื่อมัลติมีเดีย] สตูดิโอรวมผู้กำกับ AI และโมชันวิดีโอ 3D ด้วยโค้ด — ใช้เมื่อสร้างคลิป ละครสั้น หรือแอนิเมชัน 3D (Autonomous AI director, code-video, motion graphics)"
 ---
 
 # Universal Media Studio (`/genflow`)

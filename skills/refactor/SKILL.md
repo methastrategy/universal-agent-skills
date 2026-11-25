@@ -1,6 +1,6 @@
 ---
 name: refactor
-description: "จัดระเบียบและปรับโครงสร้างโค้ดให้คลีนโดยไม่เปลี่ยนผลลัพธ์เดิม — ใช้เมื่อโค้ดรก ซับซ้อน หรือต้องการแยกโมดูลให้ดูแลง่าย (Zero-regression refactoring, modular extraction, cyclomatic reduction)"
+description: "จัดระเบียบและปรับโครงสร้างโค้ดให้คลีนโดยไม่เปลี่ยนผลลัพธ์เดิม — ใช้เมื่อโค้ดรก ซับซ้อน หรือต้องการแยกโมดูลให้ดูแลง่าย (Zero-regression refactoring, modular extraction)"
 ---
 
 # Zero-Regression Codebase Refactoring

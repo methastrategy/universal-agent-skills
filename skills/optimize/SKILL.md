@@ -1,6 +1,6 @@
 ---
 name: optimize
-description: "[กลั่นกรองและจูนระบบ AGY] รวบยอดสกัดเทคนิค วิเคราะห์ความเสี่ยง ซักฟอก เคาะทางออก และบันทึกเรียนรู้อัตโนมัติ — ใช้เมื่อส่งเทคนิคใหม่ ปรับพฤติกรรม หรือจูน AGY (Unified intake, Jev triaging, grill gate, auto-learning)"
+description: "[กลั่นกรองและจูนระบบ AGY] รวบยอดสกัดเทคนิค วิเคราะห์ความเสี่ยง เคาะทางออก และบันทึกเรียนรู้อัตโนมัติ — ใช้เมื่อส่งเทคนิคใหม่หรือจูน AGY (Unified intake, Jev triaging, auto-learning)"
 ---
 
 # /optimize — ศูนย์ปรับแต่งสถาปัตยกรรม AGY แบบครบวงจร (Unified Evolution Engine)

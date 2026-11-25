@@ -1,6 +1,6 @@
 ---
 name: tomd
-description: "[แปลงไฟล์เป็น Markdown] สกัดโค้ดและเอกสารทั้งโฟลเดอร์เป็น .md — ใช้เมื่อต้องการทำ Obsidian Vault หรือคู่มือพร้อมคุม Token (Full-fidelity folder to Markdown batch extraction, Obsidian vault, token budgeting)"
+description: "[แปลงไฟล์เป็น Markdown] สกัดโค้ดและเอกสารทั้งโฟลเดอร์เป็น .md — ใช้เมื่อต้องการทำ Obsidian Vault หรือคู่มือพร้อมคุม Token (Full-fidelity folder to Markdown batch extraction)"
 ---
 
 # `/tomd` — Folder to Markdown Knowledge Base Generator

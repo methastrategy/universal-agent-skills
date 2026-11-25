@@ -1,6 +1,6 @@
 ---
 name: ea-audit
-description: "วิเคราะห์รายงาน Backtest MT5 เจาะลึก 5-Vector REA และรันลูปปรับแต่งพารามิเตอร์อัตโนมัติในพื้นหลัง (MT5 EA Backtest Forensic Audit & Autonomous Bayesian Loop)"
+description: "วิเคราะห์รายงาน Backtest MT5 เจาะลึก 5-Vector REA และรันลูปปรับแต่งพารามิเตอร์อัตโนมัติในพื้นหลัง (MT5 EA Backtest Forensic Audit, Bayesian Loop)"
 ---
 
 # MT5 EA Backtest Forensic Audit & Optimization Lab (`/ea-audit`)

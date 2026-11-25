@@ -1,6 +1,6 @@
 ---
 name: review
-description: "[ตรวจรับงาน QA/QC] ตรวจคุณภาพโค้ด ช่องโหว่ OWASP คอนทราสต์ UI — ใช้เมื่อเขียนโค้ดเสร็จและตรวจรับงานก่อนปล่อยจริง (Comprehensive code, OWASP security, UI accessibility, architecture audit)"
+description: "[ตรวจรับงาน QA/QC] ตรวจคุณภาพโค้ด ช่องโหว่ OWASP คอนทราสต์ UI — ใช้เมื่อเขียนโค้ดเสร็จและตรวจรับงานก่อนปล่อยจริง (Comprehensive code, OWASP security, architecture audit)"
 ---
 
 # /review — ศูนย์ตรวจรับงานและประกันคุณภาพครบวงจร (Unified QA & Verification Hub)
