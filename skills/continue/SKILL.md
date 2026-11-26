@@ -1,81 +1,12 @@
 ---
 name: continue
-description: "กู้คืนงานค้าง ฟื้นฟูบริบท และทำต่อจากเดิมทันที — ใช้เมื่อแชตค้าง หลุดกลางคัน สลับโมเดล หรือ Token หมดแล้วต้องต่องาน (Seamless session recovery, context restoration)"
+description: "ทำงานต่อจาก handoff หรือแชตเดิมหลังหยุด ตรวจ workspace และงานแก้ค้างก่อนเลือกขั้นต่อไป (resume interrupted work, context recovery)"
 ---
 
-# Continue & Execution Resumption Protocol
+# Continue
 
-Use this skill whenever the user invokes `/continue` (or "continue", "รันต่อ", "ทำต่อ"), or immediately after a session recovery where an agent execution was terminated due to an error, timeout, token exhaustion, or AI model switch (e.g. Claude to Gemini).
-
-## Core Objective
-Seamlessly pick up where the previous turn left off without hallucinating, without skipping planned steps, without repeating already-completed work, and without asking redundant questions.
-
-## สถาปัตยกรรมอ้างอิง (Reference Map)
-- **การจัดการความจำระยะยาวและการสังเคราะห์บริบท:** อ่าน `references/dynamic-memory-consolidation.md` ( Mem0 Graph Memory, Entity Extraction, Temporal Decay )
-
-## Execution Sequence
-
-### Phase 0 — Project Context Detection (PRIMARY — ALWAYS RUN FIRST)
-
-**Before reading any handoff file, determine which AGY Project this conversation belongs to:**
-
-1. **CWD = Project Identity:**
-   - The `Command Working Directory` in the system prompt IS the project. Read it immediately.
-   - e.g. `m:\Personal\ME_REPO\kuloykrathong-web` → this is a `kuloykrathong-web` conversation; focus on that repo and nothing else.
-   - If CWD is `~` (home/no project) → proceed to Cross-Device Handoff below.
-
-2. **Project-Scoped Git Telemetry (run immediately when CWD has a git repo):**
-   ```
-   git log -5 --oneline      → what was last worked on
-   git status                → any unstaged changes
-   git stash list            → any stashed WIP
-   git branch -a             → active feature branches
-   ```
-   This IS the ground truth. Report these 5 lines as the project status header instantly.
-
-3. **Project-Scoped Transcript Scan:**
-   - If `plan.md` or `walkthrough.md` exist in the artifact directory for this conversation ID, read them.
-   - Otherwise scan only the **current conversation's** transcript (the active Conversation ID), not other conversations.
-
-4. **Cross-Device Handoff (SECONDARY — only when CWD has no git OR user mentions "ต่อจากโน้ตบุ๊ก"/"ต่อจากคอมบ้าน"):**
-   - Only then read `G:\My Drive\01_Academic_KU\AGY_SYNC\LATEST_CROSS_DEVICE_HANDOFF.md`
-   - Run `git pull --ff-only` on the project if the handoff is from a different machine and timestamp < 48h
-
-### Phase 1: Context & State Introspection
-0. **Local Handoff (if applicable):** อ่าน `D:\WSL\.gemini\handoffs\latest-<ชื่อ workspace ปัจจุบัน>.md` ถ้ามี ใช้เมื่อ header `workspace:` ตรงกับ workspace ปัจจุบันและ `created` ไม่เกิน 48 ชม.; ไม่ตรงหรือเก่ากว่านั้น → บอกผู้ใช้แล้วถามก่อน
-1. **Read Continuation Context & Transcript:**
-   - Inspect the recent conversation summary, user's latest prompt, and last planner response.
-   - Read active tracking artifacts in the artifact directory, especially `plan.md` and `walkthrough.md`.
-2. **Ground Truth Directory & Git Inspection:**
-   - Verify the actual filesystem path and CWD before running any command (never blindly trust stale workspace URIs).
-   - Execute `git status` and `git diff --stat` to ascertain what files were already edited or committed vs. left unstaged.
-2.5. **Hindsight Reflection (Learning from Past Failures - Hindsight Pattern):**
-   - สแกนประวัติการรันล่าสุดใน `plan.md` หรือ Transcript: มีคำสั่งใดที่เคยรันแล้ว Error ซ้ำๆ หรือมี Approach ใดที่เคยล้มเหลวหรือไม่
-   - **ห้ามลองวิธีเดิมที่เคยพังแล้วเกิน 1 ครั้ง** หากตรวจพบ ให้ทำการ Epistemic Reset และเปลี่ยนสมมติฐานทันทีก่อนลงมือเขียนโค้ด
-3. **Isolate Completed vs. Pending Tasks:**
-   - Compare active working tree changes against the checklist in `plan.md`.
-   - Identify the exact pending step or sub-phase that was interrupted.
-
-### Phase 1.5: Quality Gate (Health-Check Trinity — MANDATORY before any file edit)
-Before touching any file or reporting final status, run ALL three in this order:
-1. `git status` — confirm working tree state and which files were already modified/untracked.
-2. `npx tsc --noEmit` (or `tsc --noEmit` if available) — zero TypeScript errors expected; record any pre-existing errors as a baseline before proceeding.
-3. `npx vitest run` (or project-equivalent: `npm test`, `pytest`) — all tests must pass, or failures noted as pre-existing blockers.
-
-4. **Half-applied edit check** — ถ้าไฟล์ที่ค้างแก้อยู่มีอาการเขียนทับซ้อน (JSX/tag ไม่บาลานซ์, ฟังก์ชันซ้ำสองชุด, โค้ดเก่าหลงเหลือกลางไฟล์, `import` ชี้ symbol ที่ย้ายไปแล้ว) ห้ามไล่ patch ทับ ให้ `git checkout -- <ไฟล์>` กลับไป HEAD แล้วแก้ใหม่แบบ minimal เพราะ patch ที่รายงาน success ยังทิ้งไฟล์ครึ่ง ๆ กลาง ๆ ได้ และการ patch ทับซ้อนทำให้ anchor ของ `old_string` เลื่อนจนไม่รู้ว่าไฟล์อยู่สถานะไหน — หลัง structural edit ทุกครั้งต้อง `tsc --noEmit` + build ก่อนไปต่อ
-
-Only after all four complete should the agent proceed to Phase 2. This prevents layering new changes on top of a silently broken build.
-
-### Phase 2: Autonomous Resume & Execution
-1. **Immediate Resumption:**
-   - Proceed directly with the next unfinished step in `plan.md`.
-   - Do NOT ask the user for permission to continue what was already requested.
-2. **Deterministic Verification:**
-   - Run relevant test suites (`npm test`, `vitest`, `pytest`) and production build commands (`npm run build`) to ensure the codebase remains clean.
-3. **Plan Reconciliation:**
-   - Verify all items from `plan.md` are fulfilled.
-
-### Phase 3: Consolidated Reporting
-- Report completed steps concisely.
-- Highlight any pending items or recommendations.
-- State the deployment status (e.g., GitHub/Vercel sync status) per workspace rules.
+1. ยึดเป้าหมายล่าสุดของผู้ใช้ ตรวจ workspace ปัจจุบันและไฟล์คำสั่งของโปรเจกต์ก่อนใช้บันทึกเดิม หากมี Git ใช้คำสั่งอ่านอย่างเดียวเพื่อตรวจ root, branch, HEAD, status และ diff ทั้งที่ stage และยังไม่ stage
+2. อ่านไฟล์ที่ผู้ใช้ชี้หรือ handoff ที่ workspace ระบุ ตาม [ฟอร์แมตส่งต่องาน](../handoff/FORMAT.md) ถ้าติดตั้งสกิลนี้เดี่ยว ๆ ให้ใช้ข้อมูลเป้าหมาย workspace/repo, branch, HEAD, งานที่ตรวจแล้ว งานค้าง และการกระทำถัดไปจาก handoff หรือแชตปัจจุบัน
+3. เทียบ handoff กับสถานะสด พาธข้ามเครื่องอาจต่าง ให้ตรวจ identity ของ repo และไฟล์จริง หากเป็นคนละ workspace หรือ branch หรือหลักฐานเก่า ให้ระบุจุดต่างและทำต่อเฉพาะส่วนที่ยืนยันได้ หากเป้าหมายยังคลุมเครือจนเสี่ยงแก้ผิดที่ ให้ขอข้อมูลเท่าที่จำเป็น
+4. รักษางานแก้เดิมและสถานะ index ระหว่างตรวจบริบท การ pull, เปลี่ยน branch, คืนไฟล์ หรือจัดการ stash ต้องมาจากงานที่ผู้ใช้อนุญาตและการตรวจสภาพปัจจุบัน เลือก build, lint, test หรือการตรวจเอกสารตาม stack และการแก้จริง
+5. ทำขั้นถัดไปที่ยืนยันแล้ว ตรวจผล และรายงานสิ่งที่ทำเสร็จกับงานที่ยังเหลือ

@@ -1,43 +1,40 @@
-import os
 import sys
 import json
-import glob
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 sys.stderr.reconfigure(encoding="utf-8")
 
 def get_brain_dir():
-    """Returns the absolute path to the brain directory, expanding ~ correctly cross-platform."""
-    return os.path.expanduser(os.path.join("~", ".gemini", "antigravity", "brain"))
+    return Path.home() / ".gemini" / "antigravity" / "brain"
 
-def get_latest_conversation(brain_dir):
-    """Find the most recently modified conversation directory. Handles both Antigravity and Claude Code transcript structures."""
-    if not os.path.isdir(brain_dir):
-        return None
-    dirs = [d for d in glob.glob(os.path.join(brain_dir, "*"))
-            if os.path.isdir(d) and not os.path.basename(d).startswith(".")]
-    valid_dirs = []
-    for d in dirs:
-        # Support both Antigravity and Claude Code transcript paths
-        candidate_paths = [
-            os.path.join(d, ".system_generated", "logs", "transcript.jsonl"),
-            os.path.join(d, "transcript.jsonl"),
-        ]
-        for tpath in candidate_paths:
-            if os.path.exists(tpath):
-                valid_dirs.append((d, os.path.getmtime(tpath)))
-                break
-    if not valid_dirs:
-        return None
-    valid_dirs.sort(key=lambda x: x[1], reverse=True)
-    return valid_dirs[0][0]
+def find_transcript(brain_dir, conversation_id=None):
+    """Return the conversation identity and the exact transcript path to read."""
+    brain_dir = brain_dir.resolve()
+    if conversation_id is not None:
+        if (not conversation_id or conversation_id in {".", ".."} or
+                any(char in conversation_id for char in "/\\:")):
+            raise ValueError("Invalid conversation ID.")
+        directories = [brain_dir / conversation_id]
+    elif brain_dir.is_dir():
+        directories = [path for path in brain_dir.iterdir() if not path.name.startswith(".")]
+    else:
+        directories = []
 
-def analyze_transcript(conv_dir):
-    tpath = os.path.join(conv_dir, ".system_generated", "logs", "transcript.jsonl")
-    if not os.path.exists(tpath):
-        return None
+    matches = []
+    for directory in directories:
+        if directory.resolve() != directory:
+            continue
+        for preference, relative in enumerate(("transcript.jsonl", ".system_generated/logs/transcript.jsonl")):
+            candidate = directory / relative
+            if candidate.is_file() and candidate.resolve().is_relative_to(directory):
+                matches.append((candidate.stat().st_mtime_ns, directory.name, preference, candidate))
+    if matches:
+        _, name, _, path = max(matches)
+        return name, path
+    return None
     
+def analyze_transcript(conversation_id, transcript):
     total_in = 0
     total_cache = 0
     total_out = 0
@@ -47,11 +44,29 @@ def analyze_transcript(conv_dir):
     last_turn_input = 0
     last_turn_cache = 0
     last_turn_out = 0
-    
-    with open(tpath, "r", encoding="utf-8") as f:
-        for line in f:
+    incomplete_tail = False
+    observed = set()
+
+    with transcript.open(encoding="utf-8") as stream:
+        for number, line in enumerate(stream, 1):
+            if not line.strip():
+                continue
+            try:
+                d = json.loads(line)
+            except json.JSONDecodeError as error:
+                if not line.endswith("\n"):
+                    incomplete_tail = True
+                    break
+                raise ValueError(f"Invalid JSON at line {number}.") from error
+            if not isinstance(d, dict):
+                raise ValueError(f"Expected an object at line {number}.")
+            for field in ("input_tokens", "cache_read_tokens", "output_tokens"):
+                value = d.get(field)
+                if value is not None:
+                    if type(value) is not int or value < 0:
+                        raise ValueError(f"Invalid {field} at line {number}.")
+                    observed.add(field)
             steps += 1
-            d = json.loads(line)
             if d.get("source") == "USER_EXPLICIT" and d.get("type") == "USER_INPUT":
                 turns += 1
             inp = d.get("input_tokens")
@@ -74,7 +89,9 @@ def analyze_transcript(conv_dir):
     avg_out = (total_out / steps) if steps > 0 else 0
     
     return {
-        "conv_id": os.path.basename(conv_dir),
+        "conv_id": conversation_id,
+        "status": "partial" if incomplete_tail else "ok" if observed else "no_usage" if steps else "empty",
+        "observed_metrics": sorted(observed),
         "steps": steps,
         "turns": turns,
         "base_input": first_step_input or 0,
@@ -97,22 +114,23 @@ if __name__ == "__main__":
     parser.add_argument("--json", action="store_true", help="Output raw JSON")
     args = parser.parse_args()
 
-    brain = get_brain_dir()
-    target_dir = os.path.join(brain, args.conv) if args.conv else get_latest_conversation(brain)
-
-    if not target_dir or not os.path.exists(target_dir):
-        print("Error: Conversation transcript not found.", file=sys.stderr)
-        sys.exit(1)
-
-    res = analyze_transcript(target_dir)
-    if not res:
-        print("Error: Could not parse transcript.", file=sys.stderr)
+    try:
+        selection = find_transcript(get_brain_dir(), args.conv)
+        if selection is None:
+            raise ValueError("Conversation transcript not found.")
+        res = analyze_transcript(*selection)
+    except (OSError, ValueError) as error:
+        print(f"Error: {error}", file=sys.stderr)
         sys.exit(1)
 
     if args.json:
         print(json.dumps(res, ensure_ascii=False, indent=2))
     else:
         print(f"📊 [Token Telemetry: {res['conv_id'][:8]}...]")
+        if res["status"] != "ok":
+            print(f"• Data status: {res['status']}")
+        if len(res["observed_metrics"]) < 3:
+            print(f"• Recorded metrics: {', '.join(res['observed_metrics']) or 'none'}")
         print(f"• Total Steps / Turns: {res['steps']} steps | {res['turns']} user turns")
         print(f"• Base Input (Turn 1): {res['base_input']:,} tokens")
         print(f"• Fresh Input Tokens:  {res['fresh_input']:,} tokens")

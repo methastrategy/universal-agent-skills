@@ -47,7 +47,6 @@ flowchart TD
 | **`merea`** | Reverse Eng | `/merea` | Universal reverse engineering, binary deconstruction, backward causality |
 | **`quant`** | Finance | `/quant` | Quantitative financial intelligence, multi-agent debate, data pipelines |
 | **`mql5-ea`** | Algorithmic Trading | `/mql5-ea` | MetaTrader 5 Expert Advisor lifecycle, CLI compilation, backtest loop |
-| **`ea-audit`** | Algorithmic Trading | `/ea-audit` | MetaTrader 5 backtest report analysis and parameter optimization |
 | **`medesign`** | UI/UX & Design | `/medesign` | Curated UI/UX design suite, design tokens, slides, banners, and logos |
 | **`genflow`** | Media | `/genflow` | Autonomous AI director, code-to-video, and 3D motion graphics |
 | **`continue`** | Session | `/continue` | Seamless session recovery, context restoration, and execution resumption |
@@ -57,7 +56,13 @@ flowchart TD
 | **`explain`** | Education | `/explain` | High-density technical explanation & algorithm code analogies |
 | **`tokens`** | Telemetry | `/tokens` | Live token telemetry, cache hit rate, and context window budgeting |
 | **`tomd`** | Tooling | `/tomd` | Full-fidelity folder to Markdown batch extraction |
-| **`wait-what`** | Circuit Breaker | `/wait-what` | Cognitive circuit breaker to reset loops and question assumptions |
+
+### Compatibility entries
+
+- `ea-audit` still accepts explicit requests and routes them to `mql5-ea`. Use `mql5-ea` for new report and tuning work.
+- `wait-what` still accepts explicit pause requests. The shared reassessment rule covers ordinary drift and repeated failures.
+
+Keep both compatibility entries for the transition. Retire them in a later release after the installed agents and active callers use the new routes, and after a real Tester adapter has passed a bounded run for any workflow depending on it.
 
 ---
 
