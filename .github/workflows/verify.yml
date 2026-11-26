@@ -22,3 +22,20 @@ jobs:
     - name: Run Invariant Verification Gate
       run: |
         node scripts/verify_invariants.cjs
+
+  installers:
+    name: Verify installer (${{ matrix.installer }})
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            installer: bash
+          - os: windows-latest
+            installer: powershell
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node scripts/test_installers.cjs ${{ matrix.installer }}
