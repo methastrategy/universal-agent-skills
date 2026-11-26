@@ -26,6 +26,17 @@ jobs:
     - name: Verify transcript telemetry
       run: python3 scripts/test_telemetry.py
 
+  mt5-workflows:
+    name: Verify offline MT5 workflows
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install "optuna>=4,<5"
+      - run: python scripts/test_mt5_audit.py
+
   installers:
     name: Verify installer (${{ matrix.installer }})
     strategy:
