@@ -1,11 +1,11 @@
 ---
 name: mql5-ea
-description: "พัฒนา คอมไพล์ ตรวจสอบ และรันลูป MT5 EA — ใช้เมื่อต้องการเขียนหรือปรับโค้ด EA คอมไพล์ CLI และรันลูปปรับแต่งอัตโนมัติ (MQL5 EA lifecycle: development, CLI compilation, quant edge, backtest loop)"
+description: "พัฒนา คอมไพล์ ตรวจรายงาน Backtest และทดสอบพารามิเตอร์ MT5 Expert Advisor (MQL5 development, Strategy Tester report audit, walk-forward, TPE tuning)"
 ---
 
 # MQL5 Expert Advisor & Autonomous Matrix Lab (`/mql5-ea`)
 
-ชุดเครื่องมือครบวงจรสำหรับการพัฒนา, ดีบัก, คอมไพล์, แบ็กเทสต์ และค้นหาพารามิเตอร์แบบ Multi-Objective Genetic Algorithm (4-Horizon Walk-Forward) ของ Expert Advisor (MQL5) บน MetaTrader 5 ทำงานแบบ Zero-Token 100% ภายในเครื่อง
+เลือกงานจากสิ่งที่ผู้ใช้ต้องการ ตรวจแหล่งข้อมูล เวอร์ชัน MT5 และเครื่องมือของ workspace ก่อนเริ่ม งานอ่านรายงานใช้ไฟล์ที่ส่งมาได้โดยตรง งานทดสอบหรือจูนใช้ Strategy Tester ที่แยกจากการเทรดจริง
 
 ---
 
@@ -13,31 +13,29 @@ description: "พัฒนา คอมไพล์ ตรวจสอบ แล
 
 > [!IMPORTANT]
 > **ผู้ใช้ไม่ต้องจำหรือพิมพ์ `--flag` ใดๆ ทั้งสิ้น**: ระบบจะจัดเส้นทางงานให้โดยอัตโนมัติ 2 ระดับ:
-> 1. **Auto-Detect Intent (เมื่อสั่งพร้อมบริบท):** AI วิเคราะห์ข้อความและสั่งรันโหมดย่อยที่ถูกต้องทันที
-> 2. **Interactive Cockpit Gate (เมื่อสั่งสั้นๆ หรือสั่ง `/mql5-ea` เปล่า):** AI จะเปิด `ask_question` Modal ให้คลิกเลือกทันที 1 วินาที
+> 1. **สั่งพร้อมบริบท:** เลือกโหมดจากเจตนา ตรวจพาธและ capability ก่อนรัน
+> 2. **สั่งสั้นหรือกำกวม:** ถามเฉพาะว่าจะคอมไพล์ อ่านรายงาน หรือทดสอบด้วย Tester โดยใช้ช่องทางที่โฮสต์มี
 
 ### A. Auto-Detection Matrix (ทำงานอัตโนมัติตามคำสั่ง)
 
 | สิ่งที่ตรวจพบในข้อความ / บริบท | โหมดที่ระบบเลือกใช้อัตโนมัติ | คำสั่งเบื้องหลัง |
 | :--- | :--- | :--- |
-| **มีคำว่า "optimize", "GA", "จูน", "all-weather", "genetic"** | **Multi-Objective 4-Horizon GA** | `python scripts/matrix_lab/matrix_engine.py --multi-4h <EA> <TF>` |
-| **มีคำว่า "ตรวจผล", "scorecard", "validate", "ประเมิน 4H"** | **4-Horizon Walk-Forward Scorecard** | `python scripts/matrix_lab/matrix_engine.py --validate-4h <EA> <TF>` |
+| **มีรายงาน `.htm` / `.html` หรือขอตรวจผลเดิม** | **Offline report audit** | อ่าน `references/report-audit.md` แล้วรัน `scripts/audit_report.py` ของสกิล |
+| **ระบุ Bayesian/TPE หรือขอทดลองพารามิเตอร์แบบมีงบ** | **Bounded TPE** | `scripts/tune_parameters.py` ของสกิลและ evaluator ที่ตรวจสอบแล้ว |
+| **ระบุ GA, genetic หรือ all-weather** | **Multi-Objective 4-Horizon GA** | `python scripts/matrix_lab/matrix_engine.py --multi-4h <EA> <TF>` ใน workspace ที่มี engine |
+| **ระบุ walk-forward หรือประเมิน 4H** | **4-Horizon Walk-Forward Scorecard** | `python scripts/matrix_lab/matrix_engine.py --validate-4h <EA> <TF>` ใน workspace ที่มี engine |
 | **มีคำว่า "sweep", "กวาดพารามิเตอร์", "matrix sweep"** | **Full-Dimensional Matrix Sweep** | `python scripts/matrix_lab/matrix_engine.py --full-sweep <EA>` |
 | **มีคำว่า "คอมไพล์", "compile", "บิลด์", "ex5"** | **MetaEditor CLI Compilation** | MetaEditor CLI compile & log verification |
 | **มีคำว่า "sync", "meahub", "อัปเดตเว็บ", "manifest"** | **MeaHub Manifest & Preset Sync** | `python scripts/matrix_lab/sync_manifest_4h.py` + vitest |
 
-### B. Interactive Cockpit Gate (เมื่อพิมพ์สั่งสั้นๆ เช่น "รัน EA", "เทสหน่อย", หรือพิมพ์ `/mql5-ea` เปล่า)
-AI ต้องไม่พิมพ์ถามกลับเป็นข้อความยาว แต่ต้องเรียกใช้เครื่องมือ `ask_question` ทันทีเพื่อให้ผู้ใช้คลิกเลือก:
-1. `(Recommended) 🧬 Multi-Objective 4-Horizon GA (ค้นหาพารามิเตอร์ All-Weather ที่รอดทั้ง 4 สภาวะตลาด H1..H4)`
-2. `⚡ Full-Dimensional 16-Core Matrix Sweep (กวาดพารามิเตอร์ทุกมิติผ่าน MT5 Agent Swarm)`
-3. `🏆 Walk-Forward 4-Horizon Scorecard (ตรวจสอบผลงานข้าม 4 สภาวะตลาด H1, H2, H3, H4)`
-4. `📊 Sync MeaHub Dashboard (อัปเดต Manifest + Presets + ตรวจสอบ Vitest)`
+### B. ตรวจความพร้อมก่อนรัน Tester
+ยืนยันพาธ binary, ข้อมูลทดสอบ, parameters, ช่วงเวลาและงบที่ผู้ใช้ขอ ตรวจว่า adapter ใช้ Tester แยกและปิดเฉพาะ process ของงานนั้น หากมีแค่รายงาน ให้ใช้โหมด offline และอธิบายข้อจำกัดของข้อมูลรายงาน
 
 ---
 
 ## 2. มาตรฐานการทดสอบ Walk-Forward 4-Horizon & Regime-Adaptive Gate
 
-ทุกการทดสอบและ Optimize ต้องผ่าน 4 หน้าต่าง 90 วันไม่ทับซ้อนกัน บนทุน $30.00 USD (Leverage 1:1000):
+สำหรับโปรไฟล์ XAUUSD ใน Matrix Lab ที่ใช้ชุดนี้ มี 4 หน้าต่างไม่ทับซ้อนกันบนทุน $30.00 USD (Leverage 1:1000) โจทย์อื่นให้กำหนดช่วง train และ holdout ตามตลาดและกลยุทธ์:
 - **H1 (Sprint ATH Breakout):** `2026.01.15` – `2026.04.14` (Super-Bull Expansion)
 - **H2 (Summer Chop & Range):** `2025.07.01` – `2025.09.30` (Chop & False Breaks)
 - **H3 (US Election Shock):** `2024.10.01` – `2024.12.31` (Macro Volatility & News)
@@ -79,5 +77,6 @@ AI ต้องไม่พิมพ์ถามกลับเป็นข้�
 - **ระบบ Matrix Lab & Universal Engine:** อ่าน `references/autonomous-matrix-lab.md`
 - **การทดสอบแบบชุดเบื้องหลังไม่เด้งจอ:** อ่าน `references/unattended-tester-batch.md`
 - **การตรวจชันสูตรและกู้คืน EA เก่า:** อ่าน `references/legacy-ea-audit-protocol.md`
+- **ตรวจรายงานและจูน TPE:** อ่าน `references/report-audit.md` และ `references/bayesian-tpe-optimization.md`
 - **โมดูลตัวกรองความเสี่ยงก่อนส่งคำสั่ง:** อ่าน `references/pre-execution-gate-pattern.md`
 - **การวิเคราะห์ความทนทานเชิงปริมาณ:** อ่าน `references/quant-robustness.md`

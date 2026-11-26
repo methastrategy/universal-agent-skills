@@ -1,5 +1,11 @@
 # Global Operating Rules — Token-Smart Skill & Context Governance
 
+## Pause and reassess
+Honor an explicit stop request. If work drifts or the same approach fails
+repeatedly, revisit the user's goal and current evidence, then continue with the
+next authorized, reversible step if one exists. Ask the user only for a material
+decision or missing context that prevents progress.
+
 ## Progressive Skill Loading
 - Only load a skill's full SKILL.md when directly matched to task intent
 - Skill names and descriptions are always loaded (lightweight index)

@@ -21,7 +21,11 @@ Each skill in `skills/<name>/SKILL.md` is a self-contained system prompt for a s
 **Session Mgmt:** `continue`, `handoff`, `summarize`, `tokens`
 **Design/Media:** `medesign`, `genflow`, `explain`
 **Research:** `research`, `merea`, `advice`
-**Utilities:** `tomd`, `optimize`, `wait-what`
+**Utilities:** `tomd`, `optimize`
+
+**Pause and reassess:** Honor an explicit stop. For repeated failure or scope
+drift, check the goal and current evidence, then resume from an authorized,
+reversible step when available. `wait-what` remains an explicit compatibility entry.
 
 To activate a skill: mention its name naturally or use `/skill-name` syntax.
 

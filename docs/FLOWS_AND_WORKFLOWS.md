@@ -35,4 +35,4 @@ Each skill in `skills/<name>/SKILL.md` is self-contained and can be treated as a
 - **Security & QA Agent:** Uses `skills/review/SKILL.md`
 - **Debugger Agent:** Uses `skills/debug/SKILL.md`
 - **Quant / Finance Agent:** Uses `skills/quant/SKILL.md`
-- **Circuit Breaker Gate:** Uses `skills/wait-what/SKILL.md`
+- **Reassessment:** Use the pause-and-reassess rule in `rules/AGENTS.md`. An explicit request to pause can still use `wait-what`.
