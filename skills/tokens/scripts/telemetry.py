@@ -41,9 +41,7 @@ def analyze_transcript(conversation_id, transcript):
     steps = 0
     turns = 0
     first_step_input = None
-    last_turn_input = 0
-    last_turn_cache = 0
-    last_turn_out = 0
+    last_step = {}
     incomplete_tail = False
     observed = set()
 
@@ -60,12 +58,16 @@ def analyze_transcript(conversation_id, transcript):
                 raise ValueError(f"Invalid JSON at line {number}.") from error
             if not isinstance(d, dict):
                 raise ValueError(f"Expected an object at line {number}.")
+            recorded = {}
             for field in ("input_tokens", "cache_read_tokens", "output_tokens"):
                 value = d.get(field)
                 if value is not None:
                     if type(value) is not int or value < 0:
                         raise ValueError(f"Invalid {field} at line {number}.")
-                    observed.add(field)
+                    recorded[field] = value
+            if recorded:
+                observed.update(recorded)
+                last_step = recorded
             steps += 1
             if d.get("source") == "USER_EXPLICIT" and d.get("type") == "USER_INPUT":
                 turns += 1
@@ -75,15 +77,12 @@ def analyze_transcript(conversation_id, transcript):
             
             if inp is not None:
                 total_in += inp
-                last_turn_input = inp
                 if first_step_input is None:
                     first_step_input = inp + (cache or 0)
             if cache is not None:
                 total_cache += cache
-                last_turn_cache = cache
             if out is not None:
                 total_out += out
-                last_turn_out = out
                 
     cache_pct = (total_cache / (total_in + total_cache) * 100) if (total_in + total_cache) > 0 else 0
     avg_out = (total_out / steps) if steps > 0 else 0
@@ -92,6 +91,7 @@ def analyze_transcript(conversation_id, transcript):
         "conv_id": conversation_id,
         "status": "partial" if incomplete_tail else "ok" if observed else "no_usage" if steps else "empty",
         "observed_metrics": sorted(observed),
+        "last_step_observed_metrics": sorted(last_step),
         "steps": steps,
         "turns": turns,
         "base_input": first_step_input or 0,
@@ -101,9 +101,9 @@ def analyze_transcript(conversation_id, transcript):
         "cache_hit_pct": round(cache_pct, 2),
         "avg_out_step": round(avg_out, 1),
         "last_step": {
-            "input": last_turn_input,
-            "cache": last_turn_cache,
-            "output": last_turn_out
+            "input": last_step.get("input_tokens", 0),
+            "cache": last_step.get("cache_read_tokens", 0),
+            "output": last_step.get("output_tokens", 0)
         }
     }
 
@@ -138,3 +138,6 @@ if __name__ == "__main__":
         print(f"• Output Generated:    {res['output_tokens']:,} tokens (Avg: {res['avg_out_step']}/step)")
         ls = res['last_step']
         print(f"• Latest Step Tokens:  Input={ls['input']:,} | Cache={ls['cache']:,} | Output={ls['output']:,}")
+        if len(res["last_step_observed_metrics"]) < 3:
+            metrics = ", ".join(res["last_step_observed_metrics"]) or "none"
+            print(f"• Latest step recorded metrics: {metrics}")

@@ -67,6 +67,17 @@ class TelemetryTest(unittest.TestCase):
         self.assertEqual(report["observed_metrics"], ["input_tokens"])
         self.assertIn("Data status: partial", self.run_cli().stdout)
 
+    def test_latest_metrics_come_from_one_record(self):
+        self.transcript("one", '{"input_tokens": 10, "cache_read_tokens": 5, "output_tokens": 4}\n'
+                        '{"input_tokens": 20}\n{"type": "USER_INPUT"}\n')
+        report = self.read_json()
+        self.assertEqual(report["fresh_input"], 30)
+        self.assertEqual(report["cache_read"], 5)
+        self.assertEqual(report["output_tokens"], 4)
+        self.assertEqual(report["last_step"], {"input": 20, "cache": 0, "output": 0})
+        self.assertEqual(report["last_step_observed_metrics"], ["input_tokens"])
+        self.assertIn("Latest step recorded metrics: input_tokens", self.run_cli().stdout)
+
     def test_reports_empty_unavailable_and_measured_zero_separately(self):
         for key, content, expected in [
             ("empty", "", "empty"),

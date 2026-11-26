@@ -19,7 +19,7 @@ description: "[ตรวจวัดโทเค็นสด] เช็ค Input
    - **Fresh Input Tokens:** โทเค็นอินพุตสดที่ต้องส่งเข้าโมเดลใหม่
    - **Prompt Cache Read:** โทเค็นที่อ่านผ่านแคช และอัตรา **Cache Hit Rate (%)**
    - **Output Tokens:** จำนวนโทเค็นที่โมเดลตอบทั้งหมด และค่าเฉลี่ยต่อสเต็ป
-   - **Latest Step Tokens:** สถิติเฉพาะรอบล่าสุด (Input / Cache / Output)
+   - **Latest Step Tokens:** สถิติจาก record ล่าสุดที่มีตัวเลข ตรวจ `last_step_observed_metrics` เพื่อแยกฟิลด์ที่ไม่ได้บันทึกออกจากค่าศูนย์
 
 ---
 
