@@ -1,6 +1,6 @@
 # Architecture & Cognitive Invariants
 
-This repository houses a modular, production-hardened suite of 22 AI agent skills and deterministic operating rules. Designed for AI coding assistants (Google Antigravity, Claude Code, Cursor, Windsurf) and agent orchestrators (LangGraph, n8n, AutoGen).
+This repository houses modular AI agent skills and operating rules for coding assistants and agent orchestrators. The installers discover skills by their `SKILL.md` files and preserve existing project rules and customized skills.
 
 ---
 

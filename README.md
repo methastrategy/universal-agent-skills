@@ -7,7 +7,7 @@
 [![Cursor](https://img.shields.io/badge/Cursor-Ready-000000?logo=cursor&logoColor=white)](https://cursor.com)
 [![Windsurf](https://img.shields.io/badge/Windsurf-Ready-09B6A2)](https://codeium.com/windsurf)
 
-A production-grade collection of **22 modular skills**, deterministic cognitive invariants, and structured engineering workflows for AI coding assistants and autonomous multi-agent pipelines.
+A collection of modular skills, operating rules, and structured engineering workflows for AI coding assistants.
 
 Designed to turn AI assistants into senior, high-velocity engineering partners that eliminate pleasantries, prevent hallucinations, self-heal errors, and write minimal production-ready code without drip-feeding.
 
@@ -31,7 +31,7 @@ flowchart TD
 
 ---
 
-## 🗂️ The 22 Modular Skills Catalog
+## 🗂️ Modular Skills Catalog
 
 | Skill | Category | Trigger / Command | Core Responsibility & Protocol |
 | :--- | :---: | :---: | :--- |
@@ -47,6 +47,7 @@ flowchart TD
 | **`merea`** | Reverse Eng | `/merea` | Universal reverse engineering, binary deconstruction, backward causality |
 | **`quant`** | Finance | `/quant` | Quantitative financial intelligence, multi-agent debate, data pipelines |
 | **`mql5-ea`** | Algorithmic Trading | `/mql5-ea` | MetaTrader 5 Expert Advisor lifecycle, CLI compilation, backtest loop |
+| **`ea-audit`** | Algorithmic Trading | `/ea-audit` | MetaTrader 5 backtest report analysis and parameter optimization |
 | **`medesign`** | UI/UX & Design | `/medesign` | Curated UI/UX design suite, design tokens, slides, banners, and logos |
 | **`genflow`** | Media | `/genflow` | Autonomous AI director, code-to-video, and 3D motion graphics |
 | **`continue`** | Session | `/continue` | Seamless session recovery, context restoration, and execution resumption |
@@ -62,18 +63,18 @@ flowchart TD
 
 ## ⚡ 1-Click Multi-Agent Installation (v2.0)
 
-Install all 22 skills and cognitive rules into your agent environment in seconds:
+Run the installer from the project that should receive the skills. Antigravity uses the user's home directory.
 
 ### Supported AI Agent Platforms
 | Target | CLI Flag | Destination / Setup |
 | :--- | :--- | :--- |
 | **Google Antigravity 2.0** | `antigravity` (default) | `~/.gemini/config/skills/` + global rules |
 | **Claude Code** | `claude` | `.claude/skills/` + `CLAUDE.md` |
-| **OpenAI Codex / o3 / GPT** | `codex` | `.codex/skills/` + `AGENTS.md` |
+| **OpenAI Codex / o3 / GPT** | `codex` | `.agents/skills/` + `AGENTS.md` |
 | **Cursor IDE** | `cursor` | `.cursor/skills/` + `.cursorrules` |
 | **Windsurf IDE** | `windsurf` | `.windsurf/skills/` + `.windsurfrules` |
 | **OpenClaw / Generic Agent** | `openclaw` | `.agents/skills/` + `.agents/rules/AGENTS.md` |
-| **All Platforms** | `all` | Configures all environments simultaneously |
+| **All Platforms** | `all` | Configures all targets and installs the shared Codex and OpenClaw skills once |
 
 ### Windows (PowerShell)
 ```powershell
@@ -109,13 +110,19 @@ chmod +x install.sh && ./install.sh
 ./install.sh all --dry-run
 ```
 
+### Existing installations
+
+The installer adds missing skills and rule files. It reports `[PRESENT]` for matching copies and `[KEEP]` for existing files or skill folders that differ. Review those paths before applying upstream changes to your local copies. Each skill count comes from the source folders that contain `SKILL.md`.
+
+Use dry run to preview the same destination paths and actions. Existing Codex copies in `.codex/skills/` remain available for comparison with the new project install in `.agents/skills/`. See [Codex skill locations](https://learn.chatgpt.com/docs/build-skills#where-codex-loads-local-skills).
+
 ### Antigravity Native Plugin Support
 This repository includes a root `plugin.json` manifest. You can link or copy this entire repository as an Antigravity Plugin into `~/.gemini/config/plugins/universal-agent-skills/` or use `/plugin` to manage it directly.
 
 ### Manual Directory Placement
 - **Google Antigravity 2.0:** Copy `skills/` to `~/.gemini/config/skills/` and `rules/AGENTS.md` to `~/.gemini/AGENTS.md`.
 - **Claude Code:** Copy `skills/` to `.claude/skills/` and reference `rules/CLAUDE.md`.
-- **OpenAI Codex / o3:** Copy `skills/` to `.codex/skills/` and copy `rules/CODEX.md` to project root as `AGENTS.md`.
+- **OpenAI Codex / o3:** Copy the skill folders into `.agents/skills/`. Use `rules/CODEX.md` as the initial project `AGENTS.md` or review it alongside your existing project rules.
 - **Cursor / Windsurf:** Copy `skills/` to `.cursor/skills/` or `.windsurf/skills/` and copy directives to `.cursorrules` / `.windsurfrules`.
 - **LangGraph / n8n / AutoGen Orchestrators:** See [`docs/FLOWS_AND_WORKFLOWS.md`](docs/FLOWS_AND_WORKFLOWS.md) for treating each skill as a specialized subagent prompt.
 
