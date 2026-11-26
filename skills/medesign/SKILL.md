@@ -107,7 +107,7 @@ Load only the relevant references:
 - **Motion and interaction:** `references/motion-tokens.md`, `references/compositor-smoothness.md`
 - **Accessibility and implementation review:** `references/quality-gate.md`, `references/redesign-audit.md`
 - **Existing site retrofit:** `references/web-retrofit-protocol.md`
-- **Component or modal:** `references/components.md`
+- **Component, modal, or SwiftUI registry adoption:** `references/components.md`
 - **Extract a visual system:** `references/style-extraction.md`
 - **Brand inspiration:** `references/brand-design-tokens.md` or `references/style-extraction.md`
 - **Archetype search:** `references/argon-design-archetypes.md`
