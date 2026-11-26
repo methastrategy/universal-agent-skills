@@ -8,6 +8,7 @@ A persistent log of distilled architectural insights, benchmark evaluations, and
 
 | Timestamp | What (Lesson / Invariant) | Why (First Principles) | How (Operational Mechanism) | Scope |
 | :--- | :--- | :--- | :--- | :--- |
+| **2026-11-26** | **Source-backed component selection** | A preview helps compare candidates. The registry entry and source reveal integration requirements. | [SwiftPieces benchmark](https://github.com/Saivion/SwiftPieces/tree/e68c78e7af35467298138e1607ddf7975c698f76). Search by behavior, inspect the files and license, then verify the component in the host app. | Frontend ([medesign component reference](skills/medesign/references/components.md)) |
 | **2026-11-01** | **6-Vector Pre-Flight Bug Radar** | Heavyweight model audits are slow/expensive; syntax checks alone miss runtime nulls & race conditions | Run fast System 1 defect radar (Logic, Null, Resource, Race, Security, Regression) producing calibrated probabilities in ~1s; gate execution with `CRITICAL_FIX_REQUIRED` until `APPROVED (clean)` | Global (`/jev`, `/build`) |
 | **2026-10-30** | **Modular Rule Budget Cap** | Antigravity truncates rule files exceeding 24,000 bytes at line boundaries silently | Refactor monolithic `AGENTS.md` into ≤24KB hub + modular `.agents/rules/*.md` extensions | Global (All Agents) |
 | **2026-10-30** | **Strict Subagent Cleanup Invariant** | Lingering background subagents accumulate memory and cause token leakage | Always call `manage_subagents(Action='kill_all')` immediately upon completing verification gates | Global (`AGENTS.md`) |
