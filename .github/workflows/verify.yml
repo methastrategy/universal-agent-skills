@@ -23,6 +23,9 @@ jobs:
       run: |
         node scripts/verify_invariants.cjs
 
+    - name: Verify transcript telemetry
+      run: python3 scripts/test_telemetry.py
+
   installers:
     name: Verify installer (${{ matrix.installer }})
     strategy:
