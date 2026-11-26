@@ -80,6 +80,7 @@ Plan around the user's task, not a decorative component catalogue:
 ### 4. Implement in the existing stack
 - Follow the repository's component and styling conventions.
 - Prefer existing components and tokens over duplicate systems.
+- When reusing an external component, follow the checks in `references/components.md`.
 - Keep components understandable and avoid unnecessary abstraction.
 - Use semantic HTML and accessible names.
 - Make controls functional; do not ship decorative buttons that appear actionable.
