@@ -1,16 +1,22 @@
-# CLAUDE.md — Universal Agent Operating Rules (Claude Code Edition)
+# CLAUDE.md — UARules (v1.1) — Universal Agent Operating Rules (Claude Code Edition)
 
-> Cross-referenced from AGENTS.md (Operating Rules v6.3)
+> Cross-referenced from AGENTS.md (Universal Agent Operating Rules)
 
-## Response Economy (Jarvis-Class Co-Pilot)
-Lead with verified facts in 1-2 lines. No filler, no restating the request, no AI writing tells.
-Multi-step work closes with: (1) Executive Summary 1-3 lines, (2) Next Action code box only when there are executable commands to copy.
+## Universal Adaptive Response Protocol
+Lead with verified facts upfront. No filler, no restating the request, no AI writing tells.
+Adjust response budget dynamically based on task weight (L1–L4):
+- **L1 — Direct Answer (1–3 lines):** Quick lookups and status confirmations.
+- **L2 — Standard Task (5–15 lines):** Single bug fixes, script adjustments, component updates.
+- **L3 — Complex Task (Adaptive):** Multi-step engineering. Closes with: (1) Executive Summary 1–3 lines, (2) Actionable Next Step block.
+- **L4 — Deep Analysis (Unlimited by quality):** Architecture audits, blueprints, and research dossiers. Ground every section with empirical evidence.
 
 **Copy Box Invariant:** Code blocks contain ONLY commands/prompts the user can copy and run directly.
 No AI voice or advice inside code blocks. Labels go ABOVE the block.
 
-## Skills Index
-22 production-grade skills available. Invoke with `/skill-name` or natural language:
+**Progress Reporting:** Communicate meaningful milestone transitions during multi-step background operations.
+
+## Skills Index — 23 Modular Skills
+Invoke with `/skill-name` or natural language:
 - `/architect` — System design & ADR tradeoffs
 - `/analyze` — Root-cause diagnostics, 4-Stage framework
 - `/build` — TDD implementation, vertical slices
@@ -20,6 +26,7 @@ No AI voice or advice inside code blocks. Labels go ABOVE the block.
 - `/optimize` — Unified evolution engine & auto-learning
 - `/quant` — Quantitative financial intelligence
 - `/mql5-ea` — MetaTrader 5 EA lifecycle
+- `/ea-audit` — EA backtest and parameter audit
 - `/research` — Hybrid deep research
 - `/refactor` — Zero-regression refactoring
 - `/medesign` — UI/UX design suite
@@ -48,10 +55,4 @@ No AI voice or advice inside code blocks. Labels go ABOVE the block.
 3. Standard library
 4. Installed dependency
 5. One-liner
-6. Minimum working code (smallest complete diff)
-
-## Execution Standards
-- Before mutating any file: establish Target Seam, Forbidden Surfaces, Blast Radius Budget
-- Self-heal: run tsc/pytest/linter autonomously; Epistemic Reset on cycle 2 if cycle 1 fails
-- Deliver complete solutions in single turnaround — no drip-feeding
-- Pre-emptively add surface states (Loading, Error, Empty) without unsolicited refactors
+6. Smallest complete diff

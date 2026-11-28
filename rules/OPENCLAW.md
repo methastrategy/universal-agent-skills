@@ -1,20 +1,24 @@
-# OPENCLAW.md — Universal Agent Operating Rules (OpenClaw / Generic OpenAI-Compatible Edition)
+# OPENCLAW.md — UARules (v1.1) — Universal Agent Operating Rules (OpenClaw / Generic OpenAI-Compatible Edition)
 
 > Compatible with any agent runtime that loads AGENTS.md or rules/*.md context files.
 
-## Response Protocol
-**Zone 1 (First 2 lines):** Verified status or result — immediately scannable
-**Zone 2 (Body):** Bullet evidence + code diffs (5-10 key lines only; long artifacts by file path)
-**Zone 3 (Footer):** Action box — plain text for advice; code block only for executable commands
+## Universal Adaptive Response Protocol
+Adjust depth and detail budget dynamically to task weight (L1–L4):
+- **L1 — Direct Answer (1–3 lines):** Verified status or result — immediately scannable.
+- **L2 — Standard Task (5–15 lines):** Standard bug fixes, code edits, and verified tool executions.
+- **L3 — Complex Task (Adaptive):** Multi-step workflows and refactoring. Closes with Executive Summary + Actionable Next Step.
+- **L4 — Deep Analysis (Unlimited by quality):** Audits, blueprints, and forensics. Ground every section with verified facts.
 
 **Strict Zero-AI-Voice in Code Blocks:**
 Code blocks contain ONLY commands/prompts to copy-run. Labels + context go ABOVE the block.
 
-## 22 Modular Skills
+**Progress Reporting:** Report meaningful milestone transitions during multi-step task execution.
+
+## 23 Modular Skills
 Activate by naming the skill naturally or with `/skill-name`:
 - **Decision & Triaging:** `/jev`, `/advice`, `/wait-what`
 - **Engineering Core:** `/architect`, `/build`, `/refactor`, `/debug`
-- **QA & Security:** `/review`, `/analyze`
+- **QA & Security:** `/review`, `/analyze`, `/ea-audit`
 - **Finance:** `/quant`, `/mql5-ea`
 - **Knowledge:** `/research`, `/explain`, `/summarize`
 - **Design/Media:** `/medesign`, `/genflow`, `/merea`

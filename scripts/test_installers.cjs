@@ -9,10 +9,19 @@ const path = require('node:path');
 const { test } = require('node:test');
 
 const root = path.resolve(__dirname, '..');
-const shell = process.argv[2];
+const shell = process.argv[2] || (process.platform === 'win32' ? 'powershell' : 'bash');
 assert.ok(['powershell', 'bash'].includes(shell), 'Use powershell or bash');
 const script = shell === 'powershell' ? 'install.ps1' : 'install.sh';
-const command = shell === 'powershell' ? 'pwsh' : (process.env.INSTALL_TEST_BASH || 'bash');
+let command = process.env.INSTALL_TEST_BASH || 'bash';
+if (shell === 'powershell') {
+  command = process.env.INSTALL_TEST_POWERSHELL || (function () {
+    try {
+      const check = spawnSync('pwsh', ['-v']);
+      if (check.status === 0) return 'pwsh';
+    } catch (e) {}
+    return 'powershell';
+  })();
+}
 
 const targetPaths = {
   codex: ['project', '.agents/skills', 'AGENTS.md'],
@@ -104,6 +113,23 @@ for (const [target, [scope, destination, ...rules]] of Object.entries(targetPath
     assert.deepEqual(snapshot(dirs[scope]), after);
   });
 }
+
+test('hermes preserves custom rules and skills and installs missing files', t => {
+  const dirs = fixture(t);
+  write(dirs.project, 'AGENTS.md', 'user rules\n');
+  write(dirs.project, '.agents/skills/alpha/SKILL.md', 'user skill\n');
+  const prior = snapshot(dirs.project);
+  const planned = success(run(dirs, 'hermes', true));
+  assert.deepEqual(snapshot(dirs.project), prior);
+  assert.match(planned, /\[DRY\] would install: .*beta/i);
+  assert.match(planned, /\[KEEP\].*alpha/);
+  const installed = success(run(dirs, 'hermes'));
+  assert.match(installed, /\[INSTALL\].*beta/);
+  assert.match(installed, /2 skills.*1 installed.*1 kept/);
+  const after = snapshot(dirs.project);
+  for (const [file, hash] of Object.entries(prior)) assert.equal(after[file], hash, file);
+  assert.ok(fs.existsSync(path.join(dirs.project, '.agents/skills/beta/SKILL.md')));
+});
 
 test('all installs missing rules and shares the Codex and OpenClaw skill destination', t => {
   const dirs = fixture(t);

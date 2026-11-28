@@ -130,6 +130,16 @@ for (const mf of multiAgentFiles) {
 }
 if (multiAgentMissing === 0) log('PASS', `Multi-agent support: all compatibility files present`);
 
+// ─── Gate 9: Memory Isolation Invariant ──────────────────────────────────
+// Ensure memory files (USER.md, MEMORY.md) are strictly separated from rules
+const forbiddenSyncTargets = ['USER.md', 'MEMORY.md'];
+for (const target of forbiddenSyncTargets) {
+  if (fs.existsSync(path.join(repoRoot, 'rules', target))) {
+    fail(`Memory file '${target}' must not exist in rules directory`);
+  }
+}
+log('PASS', `Memory isolation: rules directory is strictly isolated from persistent memory targets`);
+
 // ─── Final Result ──────────────────────────────────────────────────────────
 console.log('');
 if (violations > 0) {
